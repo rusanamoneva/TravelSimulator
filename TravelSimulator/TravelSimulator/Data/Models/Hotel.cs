@@ -17,12 +17,15 @@ namespace TravelSimulator.Data.Models
 
         public ICollection<Voucher> Vouchers { get; set; }
 
+        public ICollection<Room> Rooms { get; set; }
+
         public int TownId { get; set; }
         public Town Town { get; set; }
 
         public Hotel()
         {
             this.Vouchers = new List<Voucher>();
+            this.Rooms = new List<Room>();
         }
 
         public string HotelName
