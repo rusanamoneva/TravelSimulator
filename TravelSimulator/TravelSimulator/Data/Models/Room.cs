@@ -13,7 +13,7 @@ namespace TravelSimulator.Data.Models
         public bool IsCleaned { get; set; }
 
         public int HotelId { get; set; }
-        public Hotel Hotel { get; set; }
+        public virtual Hotel Hotel { get; set; }
 
         public Room()
         { }

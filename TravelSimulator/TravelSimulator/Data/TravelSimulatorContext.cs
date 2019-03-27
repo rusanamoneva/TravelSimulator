@@ -28,6 +28,7 @@ namespace TravelSimulator.Data
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(Configuration.ConnectionString).UseLazyLoadingProxies();
+                //optionsBuilder.UseSqlServer(Configuration.ConnectionString);
             }
 
             base.OnConfiguring(optionsBuilder);

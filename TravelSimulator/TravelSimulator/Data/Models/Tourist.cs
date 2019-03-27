@@ -22,7 +22,7 @@ namespace TravelSimulator.Models
 
         public int Id { get; set; }
 
-        public ICollection<Voucher> Vouchers { get; set; }
+        public virtual ICollection<Voucher> Vouchers { get; set; }
 
         public string TouristFirstName
         {

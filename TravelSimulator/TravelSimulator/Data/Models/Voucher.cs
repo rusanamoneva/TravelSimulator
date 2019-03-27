@@ -22,10 +22,10 @@ namespace TravelSimulator.Data.Models
         public int Id { get; set; }
 
         public int HotelId { get; set; }
-        public Hotel Hotel { get; set; }
+        public virtual Hotel Hotel { get; set; }
 
         public int TouristId { get; set; }
-        public Tourist Tourist { get; set; }
+        public virtual Tourist Tourist { get; set; }
 
         public int DaysOfTrip
         {

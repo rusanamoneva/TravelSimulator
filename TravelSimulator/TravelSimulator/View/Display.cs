@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TravelSimulator.View
 {
-    class Display
+    public class Display
     {
     }
 }

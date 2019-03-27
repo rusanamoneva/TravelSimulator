@@ -15,12 +15,12 @@ namespace TravelSimulator.Data.Models
 
         public int Id { get; set; }
 
-        public ICollection<Voucher> Vouchers { get; set; }
+        public virtual ICollection<Voucher> Vouchers { get; set; }
 
-        public ICollection<Room> Rooms { get; set; }
+        public virtual ICollection<Room> Rooms { get; set; }
 
         public int TownId { get; set; }
-        public Town Town { get; set; }
+        public virtual Town Town { get; set; }
 
         public Hotel()
         {
