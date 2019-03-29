@@ -32,5 +32,12 @@ namespace TravelSimulator.Models
             }
         }
 
+        public override string ToString()
+        {
+            string result = this.CountryName;
+
+            return result;
+        }
+
     }
 }

@@ -62,7 +62,7 @@ namespace TravelSimulator.Models
                     throw new ArgumentException("Invalid age! Age should be more than 0.");
                 }
 
-                this.Age = value;
+                this.age = value;
             }
         }
 
@@ -80,12 +80,15 @@ namespace TravelSimulator.Models
             }
         }
 
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
 
+            sb.Append($"First name: {this.TouristFirstName}")
+                .Append($"Last name: {this.TouristLastName}")
+                .Append($"Age: {this.Age}");
 
-
-
-
-
-
+            return sb.ToString();
+        }
     }
 }

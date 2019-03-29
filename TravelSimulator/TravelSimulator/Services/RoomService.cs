@@ -1,64 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
 using TravelSimulator.Data;
 using TravelSimulator.Data.Models;
 using TravelSimulator.Models;
 
 namespace TravelSimulator.Services
 {
-    class TownService : ITown
+    public class RoomService : IRoom
     {
         private TravelSimulatorContext context;
 
-        public TownService()
+        public RoomService()
         {
             this.context = new TravelSimulatorContext();
         }
 
-        public int AddTown(string countryName, string townName)
+        public void AddRoom(string countryName, string townName, string hotelName, RoomType roomType)
         {
             Country country = FindCountryByName(countryName);
+            Town town = FindTownByName(countryName, townName);
+            Hotel hotel = FindHotelByName(hotelName, town);
 
-            if (FindTownByName(countryName, townName) != null)
+            Room room = new Room()
             {
-                throw new ArgumentException("Town already exists!");
-            }
-
-            Town town = new Town()
-            {
-                TownName = townName,
-                Country = FindCountryByName(countryName)
+                RoomType = roomType
             };
 
-            context.Towns.Add(town);
-            country.Towns.Add(town);
+            context.Rooms.Add(room);
+            hotel.Rooms.Add(room);
             context.SaveChanges();
-
-            return FindTownByName(countryName, townName).Id;
         }
 
-        public string DeleteTown(string countryName, string townName)
+        public string DeleteRoom(string countryName, string townName, string hotelName, int roomId)
         {
             Country country = FindCountryByName(countryName);
             Town town = FindTownByName(countryName, townName);
+            Hotel hotel = FindHotelByName(hotelName, town);
+            Room room = hotel.Rooms.FirstOrDefault(x => x.Id == roomId);
 
-            country.Towns.Remove(town);
-            context.Towns.Remove(town);
-            context.SaveChanges();
+            hotel.Rooms.Remove(room);
+            context.Rooms.Remove(room);
 
-            return "Town successfully deleted.";
-        }
+            string result = "Room successfully deleted.";
 
-        public List<Hotel> ShowAllHotelsInTown(string countryName, string townName)
-        {
-            Country country = FindCountryByName(countryName);
-            Town town = FindTownByName(countryName, townName);
-
-            List<Hotel> hotelsInTown = town.Hotels.ToList();
-
-            return hotelsInTown;
+            return result;
         }
 
         private Town FindTownByName(string countryName, string townName)
@@ -83,6 +70,18 @@ namespace TravelSimulator.Services
             Country country = context.Countries.FirstOrDefault(x => x.CountryName == countryName);
 
             return country;
+        }
+
+        private static Hotel FindHotelByName(string hotelName, Town town)
+        {
+            if (town.Hotels.FirstOrDefault(x => x.HotelName == hotelName) == null)
+            {
+                throw new InvalidOperationException("There isn't a hotel with that name in town.");
+            }
+
+            Hotel hotel = town.Hotels.FirstOrDefault(x => x.HotelName == hotelName);
+
+            return hotel;
         }
     }
 }

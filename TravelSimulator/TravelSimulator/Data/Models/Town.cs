@@ -13,6 +13,8 @@ namespace TravelSimulator.Models
 
         public int Id { get; set; }
 
+        public virtual ICollection<Hotel> Hotels { get; set; }
+
         public int CountryId { get; set; }
         public virtual Country Country { get; set; }
 
@@ -28,6 +30,13 @@ namespace TravelSimulator.Models
 
                 this.townName = value;
             }
+        }
+
+        public override string ToString()
+        {
+            string result = this.TownName;
+
+            return result;
         }
     }
 }

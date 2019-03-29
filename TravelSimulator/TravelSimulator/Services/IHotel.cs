@@ -8,12 +8,12 @@ namespace TravelSimulator.Services
 {
     public interface IHotel
     {
-        int AddHotel(string hotelName, int stars, decimal pricePerNight);
+        int AddHotel(string countryName, string townName, string hotelName, int stars, decimal pricePerNight);
 
-        string RemoveHotel(string townName, string hotelName);
+        string RemoveHotel(string countryName, string townName, string hotelName);
 
-        string AddRoomInHotel(string townName, string hotelName, Room room);
+        string AddRoomInHotel(string countryName, string townName, string hotelName, Room room);
 
-        List<Tourist> GetAllTouristsInHotel();
+        List<Tourist> GetAllTouristsInHotel(string countryName, string townName, string hotelName);
     }
 }

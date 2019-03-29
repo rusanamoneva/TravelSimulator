@@ -70,5 +70,16 @@ namespace TravelSimulator.Data.Models
             }
         }
 
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append($"Hotel name: {this.HotelName}")
+                .Append($"Town: {this.Town.TownName}")
+                .Append($"Stars: {this.Stars}")
+                .Append($"Price per night: {this.PricePerNight}lv");
+
+            return sb.ToString();
+        }
     }
 }

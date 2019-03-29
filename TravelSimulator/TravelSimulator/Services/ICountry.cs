@@ -9,7 +9,7 @@ namespace TravelSimulator.Services
     {
         int AddCountry(string countryName);
 
-        string RemoveCountry(string countryName);
+        string DeleteCountry(string countryName);
 
         List<Town> ShowAllTownsInCountry(string countryName);
     }

@@ -23,7 +23,7 @@ namespace TravelSimulator.Services
                 CountryName = countryName
             };
 
-            if (context.Countries.FirstOrDefault(x => x.CountryName == countryName) != null)
+            if (FindCountryByName(countryName) != null)
             {
                 throw new ArgumentException("Country already exists!");
             }
@@ -31,18 +31,18 @@ namespace TravelSimulator.Services
             context.Countries.Add(country);
             context.SaveChanges();
 
-            int addedCountryId = context.Countries.FirstOrDefault(x => x.CountryName == countryName).Id;
+            int addedCountryId = FindCountryByName(countryName).Id;
             return addedCountryId;
         }
 
-        public string RemoveCountry(string countryName)
+        public string DeleteCountry(string countryName)
         {
-            if (context.Countries.FirstOrDefault(x => x.CountryName == countryName) == null)
+            if (FindCountryByName(countryName) == null)
             {
                 throw new ArgumentException("Country does not exist!");
             }
 
-            Country countryToRemove = context.Countries.FirstOrDefault(x => x.CountryName == countryName);
+            Country countryToRemove = FindCountryByName(countryName);
 
             context.Remove(countryToRemove);
             context.SaveChanges();
@@ -52,7 +52,25 @@ namespace TravelSimulator.Services
 
         public List<Town> ShowAllTownsInCountry(string countryName)
         {
-            throw new NotImplementedException();
+            if (FindCountryByName(countryName) == null)
+            {
+                throw new InvalidOperationException("Country does not exist!");
+            }
+            else if(FindCountryByName(countryName).Towns.Count == 0)
+            {
+                throw new InvalidOperationException("There are no towns to be shown in this country.");
+            }
+
+            List<Town> towns = FindCountryByName(countryName).Towns.ToList();
+
+            return towns;
+        }
+
+        private Country FindCountryByName(string countryName)
+        {
+            Country searchedCountry = context.Countries.FirstOrDefault(x => x.CountryName == countryName);
+
+            return searchedCountry;
         }
     }
 }
