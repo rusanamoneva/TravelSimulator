@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TravelSimulator.Models;
 
 namespace TravelSimulator.Services
 {
     public interface ITourist
     {
-        int RegisterTourist(string touristFirstName, string touristLastName, int age, string countryName);
+        string RegisterTourist(string touristFirstName, string touristLastName, int age, string countryName);
 
-        string DeleteTourist(string touristFirstName, string touristLastName);
+        string DeleteTourist(int id);
 
-        string GetTouristById(int id);
+        Tourist GetTouristById(int id);
     }
 }

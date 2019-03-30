@@ -21,6 +21,9 @@ namespace TravelSimulator.Data.Models
 
         public int Id { get; set; }
 
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+
         public int HotelId { get; set; }
         public virtual Hotel Hotel { get; set; }
 

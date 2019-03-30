@@ -52,7 +52,7 @@ namespace TravelSimulator.Services
             hotel.Rooms.Add(room);
             context.SaveChanges();
 
-            string result = $"Room {room.RoomType} successfully added."
+            string result = $"Room {room.RoomType} successfully added.";
 
             return result;
         }
