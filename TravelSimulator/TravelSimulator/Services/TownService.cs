@@ -21,10 +21,11 @@ namespace TravelSimulator.Services
         {
             Country country = FindCountryByName(countryName);
 
-            if (FindTownByName(countryName, townName) != null)
+            if (FindCountryByName(countryName).Towns.FirstOrDefault(x => x.TownName == townName) != null)
             {
                 throw new ArgumentException("Town already exists!");
             }
+
 
             Town town = new Town()
             {
@@ -58,6 +59,11 @@ namespace TravelSimulator.Services
 
             List<Hotel> hotelsInTown = town.Hotels.ToList();
 
+            if (hotelsInTown.Count == 0)
+            {
+                throw new InvalidOperationException($"No hotels to be shown in {townName}");
+            }
+
             return hotelsInTown;
         }
 
@@ -65,7 +71,7 @@ namespace TravelSimulator.Services
         {
             if (FindCountryByName(countryName).Towns.FirstOrDefault(x => x.TownName == townName) == null)
             {
-                throw new ArgumentException("Town does not exists!");
+                throw new ArgumentException("Town does not exist!");
             }
 
             Town town = FindCountryByName(countryName).Towns.FirstOrDefault(x => x.TownName == townName);

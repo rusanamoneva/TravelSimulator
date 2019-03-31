@@ -58,7 +58,7 @@ namespace TravelSimulator.Services
             }
             else if(FindCountryByName(countryName).Towns.Count == 0)
             {
-                throw new InvalidOperationException("There are no towns to be shown in this country.");
+                throw new InvalidOperationException($"There are no towns to be shown in {countryName}.");
             }
 
             List<Town> towns = FindCountryByName(countryName).Towns.ToList();

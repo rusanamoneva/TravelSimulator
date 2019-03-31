@@ -29,7 +29,7 @@ namespace TravelSimulator.Services
                 PricePerNight = pricePerNight
             };
 
-            if (town.Hotels.Contains(hotel))
+            if (town.Hotels.FirstOrDefault(x => x.HotelName == hotelName) != null)
             {
                 throw new InvalidOperationException("Hotel already exists!");
             }
@@ -47,7 +47,7 @@ namespace TravelSimulator.Services
         {
             Country country = FindCountryByName(countryName);
             Town town = FindTownByName(countryName, townName);
-            Hotel hotel = town.Hotels.FirstOrDefault(x => x.HotelName == hotelName);
+            Hotel hotel = FindHotelByName(townName, hotelName, town);
 
             hotel.Rooms.Add(room);
             context.SaveChanges();
@@ -61,7 +61,7 @@ namespace TravelSimulator.Services
         {
             Country country = FindCountryByName(countryName);
             Town town = FindTownByName(countryName, townName);
-            Hotel hotel = town.Hotels.FirstOrDefault(x => x.HotelName == hotelName);
+            Hotel hotel = FindHotelByName(townName, hotelName, town);
 
             town.Hotels.Remove(hotel);
             context.Hotels.Remove(hotel);
@@ -76,7 +76,7 @@ namespace TravelSimulator.Services
         {
             Country country = FindCountryByName(countryName);
             Town town = FindTownByName(countryName, townName);
-            Hotel hotel = town.Hotels.FirstOrDefault(x => x.HotelName == hotelName);
+            Hotel hotel = FindHotelByName(townName, hotelName, town);
 
             List<Tourist> tourists = new List<Tourist>();
 
@@ -89,6 +89,41 @@ namespace TravelSimulator.Services
             }
 
             return tourists;
+        }
+
+        public decimal ChangeHotelPrice(string countryName, string townName, string hotelName, decimal newPrice)
+        {
+            Town town = FindTownByName(countryName, townName);
+            Hotel hotel = FindHotelByName(townName, hotelName, town);
+
+            hotel.PricePerNight = newPrice;
+            context.SaveChanges();
+
+            return hotel.PricePerNight;
+        }
+
+        public int AddStarToHotel(string countryName, string townName, string hotelName)
+        {
+            Town town = FindTownByName(countryName, townName);
+            Hotel hotel = FindHotelByName(townName, hotelName, town);
+
+            hotel.Stars++;
+            context.SaveChanges();
+
+            int newStars = hotel.Stars;
+            return newStars;
+        }
+
+        public int RemoveStarFromHotel(string countryName, string townName, string hotelName)
+        {
+            Town town = FindTownByName(countryName, townName);
+            Hotel hotel = FindHotelByName(townName, hotelName, town);
+
+            hotel.Stars--;
+            context.SaveChanges();
+
+            int newStars = hotel.Stars;
+            return newStars;
         }
 
         private Town FindTownByName(string countryName, string townName)
@@ -113,6 +148,17 @@ namespace TravelSimulator.Services
             Country country = context.Countries.FirstOrDefault(x => x.CountryName == countryName);
 
             return country;
+        }
+
+        private static Hotel FindHotelByName(string townName, string hotelName, Town town)
+        {
+            if (town.Hotels.FirstOrDefault(x => x.HotelName == hotelName) == null)
+            {
+                throw new InvalidOperationException($"Hotel {hotelName} does not exist in {townName}");
+            }
+
+            Hotel hotel = town.Hotels.FirstOrDefault(x => x.HotelName == hotelName);
+            return hotel;
         }
     }
 }
