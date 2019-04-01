@@ -73,24 +73,24 @@ namespace TravelSimulator.Data
 
         public void SeedTableHotelsInBulgaria()
         {
-            //hotelService.AddHotel("Bulgaria", "Sofia", "Grand Hotel Sofia", 5, 150);
-            //hotelService.AddHotel("Bulgaria", "Sofia", "InterContinental", 5, 160);
-            //hotelService.AddHotel("Bulgaria", "Sofia", "Acord", 3, 60);
-            //hotelService.AddHotel("Bulgaria", "Sofia", "Hilton", 5, 150);
-            //hotelService.AddHotel("Bulgaria", "Sofia", "Lion", 3, 65);
+            hotelService.AddHotel("Bulgaria", "Sofia", "Grand Hotel Sofia", 5, 150);
+            hotelService.AddHotel("Bulgaria", "Sofia", "InterContinental", 5, 160);
+            hotelService.AddHotel("Bulgaria", "Sofia", "Acord", 3, 60);
+            hotelService.AddHotel("Bulgaria", "Sofia", "Hilton", 5, 150);
+            hotelService.AddHotel("Bulgaria", "Sofia", "Lion", 3, 65);
 
-            //hotelService.AddHotel("Bulgaria", "Plovdiv", "Hotel Plovdiv", 3, 55);
-            //hotelService.AddHotel("Bulgaria", "Plovdiv", "Trimontium", 4, 70);
-            //hotelService.AddHotel("Bulgaria", "Plovdiv", "Hotel Zdravets", 3, 60);
+            hotelService.AddHotel("Bulgaria", "Plovdiv", "Hotel Plovdiv", 3, 55);
+            hotelService.AddHotel("Bulgaria", "Plovdiv", "Trimontium", 4, 70);
+            hotelService.AddHotel("Bulgaria", "Plovdiv", "Hotel Zdravets", 3, 60);
 
-            //hotelService.AddHotel("Bulgaria", "Burgas", "Sunny", 3, 40);
-            //hotelService.AddHotel("Bulgaria", "Burgas", "Burgas Beach", 4, 70);
-            //hotelService.AddHotel("Bulgaria", "Burgas", "Atlantis Resort", 4, 75);
-            //hotelService.AddHotel("Bulgaria", "Burgas", "St Anastasia", 4, 95);
+            hotelService.AddHotel("Bulgaria", "Burgas", "Sunny", 3, 40);
+            hotelService.AddHotel("Bulgaria", "Burgas", "Burgas Beach", 4, 70);
+            hotelService.AddHotel("Bulgaria", "Burgas", "Atlantis Resort", 4, 75);
+            hotelService.AddHotel("Bulgaria", "Burgas", "St Anastasia", 4, 95);
 
-            //hotelService.AddHotel("Bulgaria", "Varna", "South Bay", 4, 100);
-            //hotelService.AddHotel("Bulgaria", "Varna", "Galeria", 4, 105);
-            //hotelService.AddHotel("Bulgaria", "Varna", "Victoria", 3, 60);
+            hotelService.AddHotel("Bulgaria", "Varna", "South Bay", 4, 100);
+            hotelService.AddHotel("Bulgaria", "Varna", "Galeria", 4, 105);
+            hotelService.AddHotel("Bulgaria", "Varna", "Victoria", 3, 60);
 
             hotelService.AddHotel("Bulgaria", "Sunny Beach", "Grand Victoria", 4, 100);
             hotelService.AddHotel("Bulgaria", "Sunny Beach", "Jasmine", 3, 65);

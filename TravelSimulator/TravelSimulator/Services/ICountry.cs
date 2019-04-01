@@ -11,6 +11,8 @@ namespace TravelSimulator.Services
 
         string DeleteCountry(string countryName);
 
-        List<Town> ShowAllTownsInCountry(string countryName);
+        Country GetCountryByName(string countryName);
+
+        List<Country> ShowAllCountries();
     }
 }

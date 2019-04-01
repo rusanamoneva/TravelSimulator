@@ -16,12 +16,12 @@ namespace TravelSimulator.Data
             :base(options)
         { }
 
-        public DbSet<Country> Countries { get; set; }
-        public DbSet<Town> Towns { get; set; }
-        public DbSet<Tourist> Tourists { get; set; }
-        public DbSet<Hotel> Hotels { get; set; }
-        public DbSet<Voucher> Vouchers { get; set; }
-        public DbSet<Room> Rooms { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Town> Towns { get; set; }
+        public virtual DbSet<Tourist> Tourists { get; set; }
+        public virtual DbSet<Hotel> Hotels { get; set; }
+        public virtual DbSet<Voucher> Vouchers { get; set; }
+        public virtual DbSet<Room> Rooms { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

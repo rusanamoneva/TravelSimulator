@@ -8,13 +8,18 @@ using TravelSimulator.Models;
 
 namespace TravelSimulator.Services
 {
-    class TownService : ITown
+    public class TownService : ITown
     {
         private TravelSimulatorContext context;
 
         public TownService()
         {
             this.context = new TravelSimulatorContext();
+        }
+
+        public TownService(TravelSimulatorContext cont)
+        {
+            this.context = cont;
         }
 
         public int AddTown(string countryName, string townName)
@@ -52,19 +57,85 @@ namespace TravelSimulator.Services
             return "Town successfully deleted.";
         }
 
-        public List<Hotel> ShowAllHotelsInTown(string countryName, string townName)
+        //Tested without exception
+        public List<Town> ShowAllTownsInCountry(string countryName)
         {
-            Country country = FindCountryByName(countryName);
-            Town town = FindTownByName(countryName, townName);
+            //Country country = context.Countries.FirstOrDefault(x => x.CountryName == countryName); 
 
-            List<Hotel> hotelsInTown = town.Hotels.ToList();
+            //if (country == null)
+            //{
+            //    throw new ArgumentException($"The country {countryName} isn't registered.");
+            //}
 
-            if (hotelsInTown.Count == 0)
+            List<Town> towns = new List<Town>();
+
+            foreach (Town item in context.Towns)
             {
-                throw new InvalidOperationException($"No hotels to be shown in {townName}");
+                if (item.Country.CountryName == countryName)
+                {
+                    towns.Add(item);
+                }
             }
 
-            return hotelsInTown;
+            //Country searchedCountry = context.Countries.FirstOrDefault(x => x.CountryName == countryName);
+
+            //if (searchedCountry == null)
+            //{
+            //    throw new InvalidOperationException("Country does not exist!");
+            //}
+            //else if (searchedCountry.Towns.Count == 0)
+            //{
+            //    throw new InvalidOperationException($"There are no towns to be shown in {countryName}.");
+            //}
+
+            //List<Town> towns = searchedCountry.Towns.ToList();
+
+            return towns;
+        }
+
+        //public List<Hotel> ShowAllHotelsInTown(string countryName, string townName)
+        //{
+        //    Country country = FindCountryByName(countryName);
+        //    Town town = FindTownByName(countryName, townName);
+
+        //    List<Hotel> hotelsInTown = town.Hotels.ToList();
+
+        //    if (hotelsInTown.Count == 0)
+        //    {
+        //        throw new InvalidOperationException($"No hotels to be shown in {townName}");
+        //    }
+
+        //    return hotelsInTown;
+        //}
+
+        //Tested
+        public Town GetTownByName(string countryName, string townName)
+        {
+            //Country country = context.Countries.FirstOrDefault(x => x.CountryName == countryName);
+            //Town town = country.Towns.FirstOrDefault(x => x.TownName == townName);
+
+            //if (town == null)
+            //{
+            //    throw new ArgumentException($"No town with name {townName}");
+            //}
+
+            Town town = new Town();
+
+            foreach (Town item in context.Towns)
+            {
+                if (item.Country.CountryName == countryName && item.TownName == townName)
+                {
+                    town = item;
+                }
+            }
+
+            if (town.TownName == null)
+            {
+                throw new ArgumentException($"No town with name {townName}");
+            }
+
+            return town;
+
         }
 
         private Town FindTownByName(string countryName, string townName)

@@ -17,6 +17,11 @@ namespace TravelSimulator.Services
             this.context = new TravelSimulatorContext();
         }
 
+        public HotelService(TravelSimulatorContext cont)
+        {
+            this.context = cont;
+        }
+
         public int AddHotel(string countryName, string townName, string hotelName, int stars, decimal pricePerNight)
         {
             Country country = FindCountryByName(countryName);
@@ -128,37 +133,90 @@ namespace TravelSimulator.Services
 
         private Town FindTownByName(string countryName, string townName)
         {
-            if (FindCountryByName(countryName).Towns.FirstOrDefault(x => x.TownName == townName) == null)
+            //if (FindCountryByName(countryName).Towns.FirstOrDefault(x => x.TownName == townName) == null)
+            //{
+            //    throw new ArgumentException("Town does not exists!");
+            //}
+
+            //Town town = FindCountryByName(countryName).Towns.FirstOrDefault(x => x.TownName == townName);
+
+            Town town = new Town();
+
+            foreach (Town item in context.Towns)
             {
-                throw new ArgumentException("Town does not exists!");
+                if (item.TownName == townName && item.Country.CountryName == countryName)
+                {
+                    town = item;
+                }
             }
 
-            Town town = FindCountryByName(countryName).Towns.FirstOrDefault(x => x.TownName == townName);
+            if (town.TownName == null)
+            {
+                throw new InvalidOperationException("Town does not exists!");
+            }
 
             return town;
         }
 
         private Country FindCountryByName(string countryName)
         {
-            if (context.Countries.FirstOrDefault(x => x.CountryName == countryName) == null)
+            //if (context.Countries.FirstOrDefault(x => x.CountryName == countryName) == null)
+            //{
+            //    throw new InvalidOperationException("Town should be in a valid country! This country does not exist!");
+            //}
+
+            Country country = new Country();
+
+            foreach (Country item in context.Countries)
+            {
+                if (item.CountryName == countryName)
+                {
+                    country = item;
+                }
+            }
+
+            //Country country = context.Countries.FirstOrDefault(x => x.CountryName == countryName);
+
+            if (country.CountryName == null)
             {
                 throw new InvalidOperationException("Town should be in a valid country! This country does not exist!");
             }
 
-            Country country = context.Countries.FirstOrDefault(x => x.CountryName == countryName);
-
             return country;
         }
 
-        private static Hotel FindHotelByName(string townName, string hotelName, Town town)
+        private Hotel FindHotelByName(string townName, string hotelName, Town town)
         {
-            if (town.Hotels.FirstOrDefault(x => x.HotelName == hotelName) == null)
+            //if (town.Hotels.FirstOrDefault(x => x.HotelName == hotelName) == null)
+            //{
+            //    throw new InvalidOperationException($"Hotel {hotelName} does not exist in {townName}");
+            //}
+
+            //Hotel hotel = town.Hotels.FirstOrDefault(x => x.HotelName == hotelName);
+
+            Hotel hotel = new Hotel();
+
+            foreach (Hotel item in context.Hotels)
+            {
+                if (item.Town.Country.CountryName == town.Country.CountryName 
+                    && item.Town.TownName == townName 
+                    && item.HotelName == hotelName)
+                {
+                    hotel = item;
+                }
+            }
+
+            if (hotel.HotelName == null)
             {
                 throw new InvalidOperationException($"Hotel {hotelName} does not exist in {townName}");
             }
 
-            Hotel hotel = town.Hotels.FirstOrDefault(x => x.HotelName == hotelName);
             return hotel;
+        }
+
+        public List<Hotel> ShowAllHotelsInTown(string countryName, string townName)
+        {
+            throw new NotImplementedException();
         }
     }
 }

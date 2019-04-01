@@ -16,6 +16,11 @@ namespace TravelSimulator.Services
             this.context = new TravelSimulatorContext();
         }
 
+        public CountryService(TravelSimulatorContext cont)
+        {
+            this.context = cont;
+        }
+
         public int AddCountry(string countryName)
         {
             Country country = new Country
@@ -23,7 +28,7 @@ namespace TravelSimulator.Services
                 CountryName = countryName
             };
 
-            if (FindCountryByName(countryName) != null)
+            if (context.Countries.FirstOrDefault(x => x.CountryName == countryName) != null)
             {
                 throw new ArgumentException("Country already exists!");
             }
@@ -50,20 +55,30 @@ namespace TravelSimulator.Services
             return "Country successfully removed!";
         }
 
-        public List<Town> ShowAllTownsInCountry(string countryName)
+        //Tested
+        public Country GetCountryByName(string countryName)
         {
-            if (FindCountryByName(countryName) == null)
+            Country searchedCountry = context.Countries.FirstOrDefault(x => x.CountryName == countryName);
+
+            if (searchedCountry == null)
             {
-                throw new InvalidOperationException("Country does not exist!");
-            }
-            else if(FindCountryByName(countryName).Towns.Count == 0)
-            {
-                throw new InvalidOperationException($"There are no towns to be shown in {countryName}.");
+                throw new ArgumentException("Country does not exist.");
             }
 
-            List<Town> towns = FindCountryByName(countryName).Towns.ToList();
+            return searchedCountry;
+        }
 
-            return towns;
+        //Tested
+        public List<Country> ShowAllCountries()
+        {
+            List<Country> countries = context.Countries.ToList();
+
+            if (countries.Count == 0)
+            {
+                throw new ArgumentException("No added countries.");
+            }
+    
+            return countries;
         }
 
         private Country FindCountryByName(string countryName)
