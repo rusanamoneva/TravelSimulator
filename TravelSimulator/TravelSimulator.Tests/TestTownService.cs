@@ -16,26 +16,13 @@ namespace TravelSimulator.Tests
         [Test]
         public void GetTownByNameShouldReturnTown()
         {
-            Country country = new Country()
-            {
-                CountryName = "Bulgaria"
-            };
-
-            var data = new List<Town>
-            {
-                new Town { TownName = "Sofia", Country = country },
-                new Town { TownName = "Plovdiv", Country = country },
-                new Town { TownName = "Burgas", Country = country },
-            }.AsQueryable();
-
-            var mockSet = new Mock<DbSet<Town>>();
-            mockSet.As<IQueryable<Town>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Town>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Town>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Town>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            Mock<DbSet<Town>> mockSet;
+            Mock<DbSet<Country>> mockSetCountries;
+            SeedDataBase(out mockSet, out mockSetCountries);
 
             var mockContext = new Mock<TravelSimulatorContext>();
             mockContext.Setup(c => c.Towns).Returns(mockSet.Object);
+            mockContext.Setup(x => x.Countries).Returns(mockSetCountries.Object);
 
             var service = new TownService(mockContext.Object);
             var town = service.GetTownByName("Bulgaria", "Sofia");
@@ -46,34 +33,71 @@ namespace TravelSimulator.Tests
         [Test]
         public void GetTownByNameShouldThrowExceptionWithInvalidTown()
         {
-            Country country = new Country()
-            {
-                CountryName = "Bulgaria"
-            };
-
-            var data = new List<Town>
-            {
-                new Town { TownName = "Sofia", Country = country },
-                new Town { TownName = "Plovdiv", Country = country },
-                new Town { TownName = "Burgas", Country = country },
-            }.AsQueryable();
-
-            var mockSet = new Mock<DbSet<Town>>();
-            mockSet.As<IQueryable<Town>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Town>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Town>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Town>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            Mock<DbSet<Town>> mockSet;
+            Mock<DbSet<Country>> mockSetCountries;
+            SeedDataBase(out mockSet, out mockSetCountries);
 
             var mockContext = new Mock<TravelSimulatorContext>();
             mockContext.Setup(c => c.Towns).Returns(mockSet.Object);
+            mockContext.Setup(x => x.Countries).Returns(mockSetCountries.Object);
 
             var service = new TownService(mockContext.Object);
 
-            Assert.Throws<ArgumentException>(() => service.GetTownByName("Bulgaria", "Velingrad"));
+            Assert.Throws<ArgumentException>(() => service.GetTownByName("Bulgaria", "Vidin"));
         }
 
         [Test]
         public void ShowAllTownsInCountryReturnAllTownsInCountry()
+        {
+            Mock<DbSet<Town>> mockSet;
+            Mock<DbSet<Country>> mockSetCountries;
+            SeedDataBase(out mockSet, out mockSetCountries);
+
+            var mockContext = new Mock<TravelSimulatorContext>();
+            mockContext.Setup(c => c.Towns).Returns(mockSet.Object);
+            mockContext.Setup(x => x.Countries).Returns(mockSetCountries.Object);
+
+            var service = new TownService(mockContext.Object);
+            var town = service.ShowAllTownsInCountry("Italy");
+
+            int expectedTownCountInCountry = 3;
+
+            Assert.AreEqual(expectedTownCountInCountry, town.Count);
+        }
+
+        [Test]
+        public void ShowAllTownsInCountryThrowsExceptionWithInvalidCountry()
+        {
+            Mock<DbSet<Town>> mockSet;
+            Mock<DbSet<Country>> mockSetCountries;
+            SeedDataBase(out mockSet, out mockSetCountries);
+
+            var mockContext = new Mock<TravelSimulatorContext>();
+            mockContext.Setup(c => c.Towns).Returns(mockSet.Object);
+            mockContext.Setup(x => x.Countries).Returns(mockSetCountries.Object);
+
+            var service = new TownService(mockContext.Object);
+
+            Assert.Throws<InvalidOperationException>(() => service.ShowAllTownsInCountry("America"));
+        }
+
+        [Test]
+        public void ShowAllTownsInCountryThrowsExceptionWithNoTowns()
+        {
+            Mock<DbSet<Town>> mockSet;
+            Mock<DbSet<Country>> mockSetCountries;
+            SeedDataBase(out mockSet, out mockSetCountries);
+
+            var mockContext = new Mock<TravelSimulatorContext>();
+            mockContext.Setup(c => c.Towns).Returns(mockSet.Object);
+            mockContext.Setup(x => x.Countries).Returns(mockSetCountries.Object);
+
+            var service = new TownService(mockContext.Object);
+
+            Assert.Throws<InvalidOperationException>(() => service.ShowAllTownsInCountry("Russia"));
+        }
+
+        private static void SeedDataBase(out Mock<DbSet<Town>> mockSet, out Mock<DbSet<Country>> mockSetCountries)
         {
             Country country = new Country()
             {
@@ -90,24 +114,52 @@ namespace TravelSimulator.Tests
                 new Town { TownName = "Plovdiv", Country = country },
                 new Town { TownName = "Rome", Country = country1 },
                 new Town { TownName = "Venice", Country = country1 },
-                new Town { TownName = "Milano", Country = country1 }
+                new Town { TownName = "Milano", Country = country1 },
+                new Town { TownName = "Velingrad", Country = country},
+                new Town { TownName = "Veliko Tarnovo", Country = country},
+                new Town { TownName = "Stara Zagora", Country = country},
+                new Town { TownName = "Pleven", Country = country},
+                new Town { TownName = "Melnik", Country = country},
+                new Town { TownName = "Kazanlak", Country = country},
+                new Town { TownName = "Burgas", Country = country},
+                new Town { TownName = "Varna", Country = country},
+                new Town { TownName = "Nessebar", Country = country},
+                new Town { TownName = "Sozopol", Country = country},
+                new Town { TownName = "Sunny Beach", Country = country},
+                new Town { TownName = "Pomorie", Country = country},
             }.AsQueryable();
 
-            var mockSet = new Mock<DbSet<Town>>();
+            mockSet = new Mock<DbSet<Town>>();
             mockSet.As<IQueryable<Town>>().Setup(m => m.Provider).Returns(data.Provider);
             mockSet.As<IQueryable<Town>>().Setup(m => m.Expression).Returns(data.Expression);
             mockSet.As<IQueryable<Town>>().Setup(m => m.ElementType).Returns(data.ElementType);
             mockSet.As<IQueryable<Town>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
 
-            var mockContext = new Mock<TravelSimulatorContext>();
-            mockContext.Setup(c => c.Towns).Returns(mockSet.Object);
+            var dataCountries = new List<Country>
+            {
+                new Country { CountryName = "Bulgaria"},
+                new Country { CountryName = "Germany"},
+                new Country { CountryName = "England"},
+                new Country { CountryName = "Greece"},
+                new Country { CountryName = "Serbia"},
+                new Country { CountryName = "France"},
+                new Country { CountryName = "Russia"},
+                new Country { CountryName = "Turkey"},
+                new Country { CountryName = "Hungary"},
+                new Country { CountryName = "Austria"},
+                new Country { CountryName = "Norway"},
+                new Country { CountryName = "Sweeden"},
+                new Country { CountryName = "Ukraine"},
+                new Country { CountryName = "Spain"},
+                new Country { CountryName = "Italy"}
+            }.AsQueryable();
 
-            var service = new TownService(mockContext.Object);
-            var town = service.ShowAllTownsInCountry("Italy");
-
-            Assert.AreEqual(3, town.Count);
+            mockSetCountries = new Mock<DbSet<Country>>();
+            mockSetCountries.As<IQueryable<Country>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSetCountries.As<IQueryable<Country>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSetCountries.As<IQueryable<Country>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSetCountries.As<IQueryable<Country>>().Setup(m => m.GetEnumerator()).Returns(dataCountries.GetEnumerator());
         }
 
-        
     }
 }

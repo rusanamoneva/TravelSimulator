@@ -12,12 +12,16 @@ namespace TravelSimulator.Services
 
         string DeleteVoucher(Tourist tourist, Hotel hotel);
 
-        decimal CalculateTripPrice(Tourist tourist, Hotel hotel, int daysOfTrip);
+        decimal CalculateTripPrice(int voucherId);
 
-        List<Tourist> GetArrtivalsByDate(DateTime startDate);
+        List<Voucher> GetAllVouchersByTouristNameAndHotel(string touristFirstName, string touristLastName, Hotel hotel);
 
-        List<Tourist> GetDeparturesByDate(DateTime endDate);
+        List<Voucher> GetArrtivalsByDate(DateTime startDate);
 
-        decimal GetPriceWithDiscount(Voucher voucher, decimal discountPercent);
+        List<Voucher> GetDeparturesByDate(DateTime endDate);
+
+        List<Tourist> GetAllTouristsByHotel(string countryName, string townName, string hotelName);
+
+        decimal GetPriceWithDiscount(int voucherId, decimal discountPercent);
     }
 }

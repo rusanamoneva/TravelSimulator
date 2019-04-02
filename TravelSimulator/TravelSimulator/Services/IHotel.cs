@@ -14,7 +14,7 @@ namespace TravelSimulator.Services
 
         string AddRoomInHotel(string countryName, string townName, string hotelName, Room room);
 
-        List<Tourist> GetAllTouristsInHotel(string countryName, string townName, string hotelName);
+        //List<Tourist> GetAllTouristsInHotel(string countryName, string townName, string hotelName);
 
         List<Hotel> ShowAllHotelsInTown(string countryName, string townName);
 

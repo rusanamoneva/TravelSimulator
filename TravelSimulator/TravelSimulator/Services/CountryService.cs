@@ -28,7 +28,7 @@ namespace TravelSimulator.Services
                 CountryName = countryName
             };
 
-            if (context.Countries.FirstOrDefault(x => x.CountryName == countryName) != null)
+            if (GetCountryByName(countryName) != null)
             {
                 throw new ArgumentException("Country already exists!");
             }
@@ -36,18 +36,18 @@ namespace TravelSimulator.Services
             context.Countries.Add(country);
             context.SaveChanges();
 
-            int addedCountryId = FindCountryByName(countryName).Id;
+            int addedCountryId = GetCountryByName(countryName).Id;
             return addedCountryId;
         }
 
         public string DeleteCountry(string countryName)
         {
-            if (FindCountryByName(countryName) == null)
+            if (GetCountryByName(countryName) == null)
             {
                 throw new ArgumentException("Country does not exist!");
             }
 
-            Country countryToRemove = FindCountryByName(countryName);
+            Country countryToRemove = GetCountryByName(countryName);
 
             context.Remove(countryToRemove);
             context.SaveChanges();
@@ -81,11 +81,5 @@ namespace TravelSimulator.Services
             return countries;
         }
 
-        private Country FindCountryByName(string countryName)
-        {
-            Country searchedCountry = context.Countries.FirstOrDefault(x => x.CountryName == countryName);
-
-            return searchedCountry;
-        }
     }
 }

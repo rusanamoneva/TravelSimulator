@@ -17,6 +17,11 @@ namespace TravelSimulator.Services
             this.context = new TravelSimulatorContext();
         }
 
+        public TouristService(TravelSimulatorContext cont)
+        {
+            this.context = cont;
+        }
+
         public string RegisterTourist(string touristFirstName, string touristLastName, int age, string countryName)
         {
             Tourist tourist = new Tourist()
@@ -47,11 +52,48 @@ namespace TravelSimulator.Services
             return result;
         }
 
+        public int ChangeTouristAge(int id, int newAge)
+        {
+            Tourist tourist = GetTouristById(id);
+
+            tourist.Age = newAge;
+            context.SaveChanges();
+
+            int updatedAge = context.Tourists.FirstOrDefault(x => x.Id == id).Age;
+
+            return updatedAge;
+        }
+
         public Tourist GetTouristById(int id)
         {
             Tourist tourist = context.Tourists.FirstOrDefault(x => x.Id == id);
 
+            if (tourist == null)
+            {
+                throw new InvalidOperationException("This tourist does not exist.");
+            }
+
             return tourist;
+        }
+
+        public List<Tourist> ShowAllTouristsByCountryTheyComeFrom(string countryName)
+        {
+            List<Tourist> tourists = new List<Tourist>();
+
+            foreach (Tourist tourist in context.Tourists)
+            {
+                if (tourist.CountryName == countryName)
+                {
+                    tourists.Add(tourist);
+                }
+            }
+
+            if (tourists.Count == 0)
+            {
+                throw new InvalidOperationException("No tourists to be shown.");
+            }
+
+            return tourists;
         }
 
         private Town FindTownByName(string countryName, string townName)

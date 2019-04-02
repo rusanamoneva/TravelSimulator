@@ -61,18 +61,7 @@ namespace TravelSimulator.Tests
         [Test]
         public void GetCountryByName()
         {
-            var data = new List<Country>
-            {
-                new Country { CountryName = "Bulgaria"},
-                new Country { CountryName = "Germany"},
-                new Country { CountryName = "Italy"},
-            }.AsQueryable();
-
-            var mockSet = new Mock<DbSet<Country>>();
-            mockSet.As<IQueryable<Country>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Country>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Country>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Country>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            Mock<DbSet<Country>> mockSet = SeedDataBase();
 
             var mockContext = new Mock<TravelSimulatorContext>();
             mockContext.Setup(c => c.Countries).Returns(mockSet.Object);
@@ -80,48 +69,28 @@ namespace TravelSimulator.Tests
             var service = new CountryService(mockContext.Object);
             var country = service.GetCountryByName("Bulgaria");
 
-            Assert.AreEqual("Bulgaria", country.CountryName);
+            string expectedCountryName = "Bulgaria";
+
+            Assert.AreEqual(expectedCountryName, country.CountryName);
         }
 
         [Test]
         public void GetCountryByNameThrowsExceptionWhitNoRegisteredCountry()
         {
-            var data = new List<Country>
-            {
-                new Country { CountryName = "Bulgaria"},
-                new Country { CountryName = "Germany"},
-                new Country { CountryName = "Italy"},
-            }.AsQueryable();
-
-            var mockSet = new Mock<DbSet<Country>>();
-            mockSet.As<IQueryable<Country>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Country>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Country>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Country>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            Mock<DbSet<Country>> mockSet = SeedDataBase();
 
             var mockContext = new Mock<TravelSimulatorContext>();
             mockContext.Setup(c => c.Countries).Returns(mockSet.Object);
 
             var service = new CountryService(mockContext.Object);           
 
-            Assert.Throws<ArgumentException>(() => service.GetCountryByName("Greece"));
+            Assert.Throws<ArgumentException>(() => service.GetCountryByName("Macedonia"));
         }
 
         [Test]
         public void ShowAllCountries()
         {
-            var data = new List<Country>
-            {
-                new Country { CountryName = "Bulgaria"},
-                new Country { CountryName = "Germany"},
-                new Country { CountryName = "Italy"},
-            }.AsQueryable();
-
-            var mockSet = new Mock<DbSet<Country>>();
-            mockSet.As<IQueryable<Country>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Country>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Country>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Country>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            Mock<DbSet<Country>> mockSet = SeedDataBase();
 
             var mockContext = new Mock<TravelSimulatorContext>();
             mockContext.Setup(c => c.Countries).Returns(mockSet.Object);
@@ -129,7 +98,9 @@ namespace TravelSimulator.Tests
             var service = new CountryService(mockContext.Object);
             var country = service.ShowAllCountries().ToList();
 
-            Assert.AreEqual(3, country.Count);
+            int expectedCountriesCount = 14;
+
+            Assert.AreEqual(expectedCountriesCount, country.Count);
         }
 
         [Test]
@@ -138,9 +109,6 @@ namespace TravelSimulator.Tests
             var data = new List<Country>();
 
             var mockSet = new Mock<DbSet<Country>>();
-            //mockSet.As<IQueryable<Country>>().Setup(m => m.Provider).Returns(data.Provider);
-            //mockSet.As<IQueryable<Country>>().Setup(m => m.Expression).Returns(data.Expression);
-            //mockSet.As<IQueryable<Country>>().Setup(m => m.ElementType).Returns(data.ElementType);
             mockSet.As<IQueryable<Country>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
 
             var mockContext = new Mock<TravelSimulatorContext>();
@@ -151,6 +119,32 @@ namespace TravelSimulator.Tests
             Assert.Throws<ArgumentException>(() => service.ShowAllCountries());
         }
 
-        
+        private static Mock<DbSet<Country>> SeedDataBase()
+        {
+            var data = new List<Country>
+            {
+                new Country { CountryName = "Bulgaria"},
+                new Country { CountryName = "Germany"},
+                new Country { CountryName = "England"},
+                new Country { CountryName = "Greece"},
+                new Country { CountryName = "Serbia"},
+                new Country { CountryName = "France"},
+                new Country { CountryName = "Russia"},
+                new Country { CountryName = "Turkey"},
+                new Country { CountryName = "Hungary"},
+                new Country { CountryName = "Austria"},
+                new Country { CountryName = "Norway"},
+                new Country { CountryName = "Sweeden"},
+                new Country { CountryName = "Ukraine"},
+                new Country { CountryName = "Spain"}
+            }.AsQueryable();
+
+            var mockSet = new Mock<DbSet<Country>>();
+            mockSet.As<IQueryable<Country>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<Country>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<Country>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<Country>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            return mockSet;
+        }
     }
 }

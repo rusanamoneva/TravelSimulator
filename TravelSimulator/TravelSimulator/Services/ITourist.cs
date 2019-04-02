@@ -12,5 +12,9 @@ namespace TravelSimulator.Services
         string DeleteTourist(int id);
 
         Tourist GetTouristById(int id);
+
+        int ChangeTouristAge(int id, int newAge);
+
+        List<Tourist> ShowAllTouristsByCountryTheyComeFrom(string countryName);
     }
 }
