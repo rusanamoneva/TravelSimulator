@@ -76,7 +76,11 @@ namespace TravelSimulator.Services
 
             return result;
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 43aed3abc9d4149ca4b796e8f4e23a9ca67cbd83
         //Tested
         public decimal ChangeHotelPrice(string countryName, string townName, string hotelName, decimal newPrice)
         {
@@ -90,30 +94,45 @@ namespace TravelSimulator.Services
         }
 
         //Tested
+<<<<<<< HEAD
         public int AddStarToHotel(string countryName, string townName, string hotelName)
         {
             Town town = FindTownByName(countryName, townName);
             Hotel hotel = FindHotelByName(hotelName, town);
+=======
+        //public int AddStarToHotel(string countryName, string townName, string hotelName)
+        //{
+        //    Town town = FindTownByName(countryName, townName);
+        //    Hotel hotel = FindHotelByName(townName, hotelName, town);
+>>>>>>> 43aed3abc9d4149ca4b796e8f4e23a9ca67cbd83
 
-            hotel.Stars++;
-            context.SaveChanges();
+        //    hotel.Stars++;
+        //    context.SaveChanges();
 
-            int newStars = hotel.Stars;
-            return newStars;
-        }
+        //    int newStars = hotel.Stars;
+        //    return newStars;
+        //}
 
+<<<<<<< HEAD
         //Tested
         public int RemoveStarFromHotel(string countryName, string townName, string hotelName)
         {
             Town town = FindTownByName(countryName, townName);
             Hotel hotel = FindHotelByName(hotelName, town);
+=======
+        ////Tested
+        //public int RemoveStarFromHotel(string countryName, string townName, string hotelName)
+        //{
+        //    Town town = FindTownByName(countryName, townName);
+        //    Hotel hotel = FindHotelByName(townName, hotelName, town);
+>>>>>>> 43aed3abc9d4149ca4b796e8f4e23a9ca67cbd83
 
-            hotel.Stars--;
-            context.SaveChanges();
+        //    hotel.Stars--;
+        //    context.SaveChanges();
 
-            int newStars = hotel.Stars;
-            return newStars;
-        }
+        //    int newStars = hotel.Stars;
+        //    return newStars;
+        //}
 
         public List<Hotel> ShowAllHotelsInTown(string countryName, string townName)
         {
