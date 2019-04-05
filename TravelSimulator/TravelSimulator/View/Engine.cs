@@ -31,7 +31,7 @@ namespace TravelSimulator.View
                         RunFindPage();
                         break;
                     case "D3":
-                        //;
+                        RunListPage();
                         break;
                     case "D4":
                         //;
@@ -61,7 +61,7 @@ namespace TravelSimulator.View
                 switch (keyValue)
                 {
                     case "D1":
-                        //idk;
+                        //;
                         break;
                     case "D2":
                         //View.Display.PrintAddPage();
@@ -77,6 +77,12 @@ namespace TravelSimulator.View
                         break;
                 }
             } while (keyValue != "D0");
+        }
+
+        //in progress
+        private void RunAddCountryPage()
+        {
+
         }
         
         //in progress
@@ -94,6 +100,38 @@ namespace TravelSimulator.View
                 {
                     case "D1":
                         //idk;
+                        break;
+                    case "D2":
+                        //View.Display.PrintAddPage();
+                        break;
+                    case "D3":
+                        //View.Display.PrintAddPage();
+                        break;
+                    case "D4":
+                        //View.Display.PrintAddPage();
+                        break;
+                    case "D5":
+                        //View.Display.PrintAddPage();
+                        break;
+                }
+            } while (keyValue != "D0");
+        }
+
+        //in progress
+        private void RunListPage()
+        {
+            ConsoleKeyInfo key;
+            string keyValue;
+            Display.PrintListPage();
+            do
+            {
+                key = Console.ReadKey(true);
+                keyValue = key.Key.ToString();
+
+                switch (keyValue)
+                {
+                    case "D1":
+                        //;
                         break;
                     case "D2":
                         //View.Display.PrintAddPage();

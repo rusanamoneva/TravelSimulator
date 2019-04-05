@@ -114,6 +114,15 @@ namespace TravelSimulator.View
             Console.WriteLine(Footer());
         }
 
+        //Add country page
+        public static void PrintAddCountryPage()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(AddPageMenu());
+
+        }
+
         //--------------------------//
 
         //Find page elements:
@@ -132,5 +141,55 @@ namespace TravelSimulator.View
         }
 
         //--------------------------//
+
+        //List page elements:
+        //----List----
+        private static string ListPageMenu()
+        {
+            StringBuilder home = new StringBuilder();
+            return home.Append('-', 19).Append("LIST").Append('-', 19).AppendLine().ToString();
+        }
+
+        //Buttons
+        private static string ListPageOptions()
+        {
+            StringBuilder options = new StringBuilder();
+            options.AppendLine()
+                    .AppendLine()
+                    .Append("[1] - Countries")
+                    .AppendLine()
+                    .Append("[2] - Towns")
+                    .AppendLine()
+                    .Append("[3] - Hotels")
+                    .AppendLine()
+                    .Append("[4] - Leaving on...")
+                    .AppendLine()
+                    .Append("[5] - Arriving on...")
+                    .AppendLine()
+                    .Append("[6] - Tourists")
+                    .AppendLine();
+
+            return options.ToString();
+        }
+
+        public static void PrintListPage()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(ListPageMenu());
+            Console.WriteLine(ListPageOptions());
+            Console.WriteLine(Footer());
+        }
+
+        //--------------------------//
+
+        //Error screen elements:
+        //----Error!----
+
+        private static string ErrorMenu()
+        {
+            StringBuilder home = new StringBuilder();
+            return home.Append('-', 18).Append("ERROR!").Append('-', 18).AppendLine().ToString();
+        }
     }
 }

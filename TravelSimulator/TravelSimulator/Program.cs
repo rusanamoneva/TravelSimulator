@@ -17,6 +17,7 @@ namespace TravelSimulator
 
             View.Engine engine = new View.Engine();
             engine.Run();
+            //View.Display.PrintListPage();
         }
     }
 }
