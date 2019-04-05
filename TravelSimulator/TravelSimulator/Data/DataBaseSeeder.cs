@@ -40,6 +40,7 @@ namespace TravelSimulator.Data
             townService.AddTown("Bulgaria", "Bansko");
             townService.AddTown("Bulgaria", "Borovets");
             townService.AddTown("Bulgaria", "Velingrad");
+            townService.AddTown("Bulgaria", "Sunny Beach");
 
             townService.AddTown("Germany", "Berlin");
             townService.AddTown("Germany", "Munich");
