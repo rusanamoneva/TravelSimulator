@@ -28,10 +28,10 @@ namespace TravelSimulator.Services
                 CountryName = countryName
             };
 
-            if (GetCountryByName(countryName) != null)
-            {
-                throw new ArgumentException("Country already exists!");
-            }
+            //if (GetCountryByName(countryName) != null)
+            //{
+            //    throw new ArgumentException("Country already exists!");
+            //}
 
             context.Countries.Add(country);
             context.SaveChanges();

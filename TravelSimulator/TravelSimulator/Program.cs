@@ -11,7 +11,7 @@ namespace TravelSimulator
     {
         public static void Main(string[] args)
         {
-           
+            
         }
     }
 }

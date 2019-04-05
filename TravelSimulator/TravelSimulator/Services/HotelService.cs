@@ -52,7 +52,7 @@ namespace TravelSimulator.Services
         {
             Country country = FindCountryByName(countryName);
             Town town = FindTownByName(countryName, townName);
-            Hotel hotel = FindHotelByName(townName, hotelName, town);
+            Hotel hotel = FindHotelByName(hotelName, town);
 
             hotel.Rooms.Add(room);
             context.SaveChanges();
@@ -66,7 +66,7 @@ namespace TravelSimulator.Services
         {
             Country country = FindCountryByName(countryName);
             Town town = FindTownByName(countryName, townName);
-            Hotel hotel = FindHotelByName(townName, hotelName, town);
+            Hotel hotel = FindHotelByName(hotelName, town);
 
             town.Hotels.Remove(hotel);
             context.Hotels.Remove(hotel);
@@ -77,31 +77,11 @@ namespace TravelSimulator.Services
             return result;
         }
 
-        //
-        //public List<Tourist> GetAllTouristsInHotel(string countryName, string townName, string hotelName)
-        //{
-        //    Country country = FindCountryByName(countryName);
-        //    Town town = FindTownByName(countryName, townName);
-        //    Hotel hotel = FindHotelByName(townName, hotelName, town);
-
-        //    List<Tourist> tourists = new List<Tourist>();
-
-        //    foreach (Voucher voucher in context.Vouchers)
-        //    {
-        //        if (voucher.Hotel.HotelName == hotelName)
-        //        {
-        //            tourists.Add(voucher.Tourist);
-        //        }
-        //    }
-
-        //    return tourists;
-        //}
-
         //Tested
         public decimal ChangeHotelPrice(string countryName, string townName, string hotelName, decimal newPrice)
         {
             Town town = FindTownByName(countryName, townName);
-            Hotel hotel = FindHotelByName(townName, hotelName, town);
+            Hotel hotel = FindHotelByName(hotelName, town);
 
             hotel.PricePerNight = newPrice;
             context.SaveChanges();
@@ -113,7 +93,7 @@ namespace TravelSimulator.Services
         public int AddStarToHotel(string countryName, string townName, string hotelName)
         {
             Town town = FindTownByName(countryName, townName);
-            Hotel hotel = FindHotelByName(townName, hotelName, town);
+            Hotel hotel = FindHotelByName(hotelName, town);
 
             hotel.Stars++;
             context.SaveChanges();
@@ -126,7 +106,7 @@ namespace TravelSimulator.Services
         public int RemoveStarFromHotel(string countryName, string townName, string hotelName)
         {
             Town town = FindTownByName(countryName, townName);
-            Hotel hotel = FindHotelByName(townName, hotelName, town);
+            Hotel hotel = FindHotelByName(hotelName, town);
 
             hotel.Stars--;
             context.SaveChanges();
@@ -212,16 +192,11 @@ namespace TravelSimulator.Services
             return country;
         }
 
-        private Hotel FindHotelByName(string townName, string hotelName, Town town)
+        public Hotel FindHotelByName(string hotelName, Town town)
         {
-            //if (town.Hotels.FirstOrDefault(x => x.HotelName == hotelName) == null)
-            //{
-            //    throw new InvalidOperationException($"Hotel {hotelName} does not exist in {townName}");
-            //}
-
-            //Hotel hotel = town.Hotels.FirstOrDefault(x => x.HotelName == hotelName);
-
             Hotel hotel = new Hotel();
+
+            string townName = town.TownName;
 
             foreach (Hotel item in context.Hotels)
             {
