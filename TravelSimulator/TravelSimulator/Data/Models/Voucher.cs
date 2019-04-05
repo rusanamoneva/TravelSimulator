@@ -49,11 +49,6 @@ namespace TravelSimulator.Data.Models
             get { return this.tripPrice; }
             set
             {
-                if (value <= 0)
-                {
-                    throw new ArgumentException("Days of trip should be more than 1 day.");
-                }
-
                 this.tripPrice = value;
             }
         }
