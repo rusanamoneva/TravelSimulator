@@ -214,6 +214,21 @@ namespace TravelSimulator.Services
             return result;
         }
 
+        public string DeleteVoucherByTown(string townName)
+        {
+            foreach (Voucher voucher in context.Vouchers)
+            {
+                if (voucher.Hotel.Town.TownName == townName)
+                {
+                    DeleteVoucher(voucher.Tourist, voucher.Hotel);
+                }
+            }
+
+            string result = "Vouchers deleted.";
+
+            return result;
+        }
+
         private void ValidateData(Tourist tourist, Hotel hotel)
         {
             if (context.Tourists.FirstOrDefault(x => x.TouristFirstName == tourist.TouristFirstName) == null)

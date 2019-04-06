@@ -71,7 +71,6 @@ namespace TravelSimulator.Data.Models
         {
             StringBuilder sb = new StringBuilder();
 
-<<<<<<< HEAD
             sb.Append($"Hotel name: {this.HotelName} ")
                 .Append($"Town: {this.Town.TownName} ")
                 .Append($"Stars: {this.Stars} ")
@@ -81,12 +80,11 @@ namespace TravelSimulator.Data.Models
                 .Append('*', this.Stars).AppendLine()
                 .Append($"Town: {this.Town.TownName}").AppendLine()
                 .Append($"Price per night: {this.PricePerNight :2f}lv.");
-=======
+
             sb.Append($"Hotel: {this.HotelName} ")
                 .Append('*', this.Stars).AppendLine()
                 .Append($"Town: {this.Town.TownName}").AppendLine()
                 .Append($"Price per night: {this.initialPricePerNight:f2}lv.");
->>>>>>> fdcd898c706786c67f42bb8a10c300333962d910
 
             return sb.ToString();
         }
