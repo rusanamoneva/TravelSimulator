@@ -114,13 +114,20 @@ namespace TravelSimulator.View
             Console.WriteLine(Footer());
         }
 
-        //Add country page
+        //Add country page elements:
+        //----Add a new country----
+        private static string AddCountryPageMenu()
+        {
+            StringBuilder home = new StringBuilder();
+            return home.Append('-', 12).Append("ADD A NEW COUNTRY:").Append('-', 12).AppendLine().ToString();
+        }
+
         public static void PrintAddCountryPage()
         {
             Console.Clear();
             Console.WriteLine(Header());
-            Console.WriteLine(AddPageMenu());
-
+            Console.WriteLine(AddCountryPageMenu());
+            Console.WriteLine("Enter name of country:");
         }
 
         //--------------------------//
@@ -185,11 +192,22 @@ namespace TravelSimulator.View
 
         //Error screen elements:
         //----Error!----
-
         private static string ErrorMenu()
         {
             StringBuilder home = new StringBuilder();
             return home.Append('-', 18).Append("ERROR!").Append('-', 18).AppendLine().ToString();
+        }
+
+        public static void PrintErrorScreen()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(ErrorMenu());
+        }
+
+        public static string GoBackMessage()
+        {
+            return Environment.NewLine + "Press any key to go back.";
         }
     }
 }

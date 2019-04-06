@@ -61,7 +61,7 @@ namespace TravelSimulator.View
                 switch (keyValue)
                 {
                     case "D1":
-                        //;
+                        RunAddCountryPage();
                         break;
                     case "D2":
                         //View.Display.PrintAddPage();
@@ -82,7 +82,22 @@ namespace TravelSimulator.View
         //in progress
         private void RunAddCountryPage()
         {
+            Display.PrintAddCountryPage();
+            Services.CountryService countryService = new Services.CountryService();
+            try
+            {
+                string countryName = Console.ReadLine();
+                countryService.AddCountry(countryName);
 
+                Console.WriteLine(Display.GoBackMessage());
+            }
+            catch (Exception ex)
+            {
+                Console.Clear();
+                Display.PrintErrorScreen();
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(Display.GoBackMessage());
+            }
         }
         
         //in progress
