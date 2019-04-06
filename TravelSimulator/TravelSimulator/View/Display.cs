@@ -177,7 +177,7 @@ namespace TravelSimulator.View
         }
 
         //Add hotel elements:
-        //----Add a new hotel in----
+        //----Add a new hotel----
         private static string AddHotelPageMenu()
         {
             StringBuilder home = new StringBuilder();
