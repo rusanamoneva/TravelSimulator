@@ -100,7 +100,7 @@ namespace TravelSimulator.View
             Console.ReadKey(true);
         }
         
-        //in progress
+        //finished
         private void RunAddTownPage()
         {
             Display.PrintAddTownPage();
@@ -173,7 +173,7 @@ namespace TravelSimulator.View
                 switch (keyValue)
                 {
                     case "D1":
-                        //;
+                        RunListCountries();
                         break;
                     case "D2":
                         //View.Display.PrintAddPage();
@@ -189,6 +189,13 @@ namespace TravelSimulator.View
                         break;
                 }
             } while (keyValue != "D0");
+        }
+
+        //finished
+        private void RunListCountries()
+        {
+            Display.PrintListCountries();
+            Console.ReadKey(true);
         }
     }
 }

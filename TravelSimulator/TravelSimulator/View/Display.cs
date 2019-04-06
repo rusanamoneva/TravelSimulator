@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TravelSimulator.Data;
+using TravelSimulator.Models;
 
 namespace TravelSimulator.View
 {
@@ -31,6 +33,7 @@ namespace TravelSimulator.View
         {
             return Environment.NewLine + "Press any key to go back.";
         }
+        
         //--------------------------//
 
         //Home page elements:
@@ -208,9 +211,9 @@ namespace TravelSimulator.View
                     .AppendLine()
                     .Append("[1] - Countries")
                     .AppendLine()
-                    .Append("[2] - Towns")
+                    .Append("[2] - Towns in...")
                     .AppendLine()
-                    .Append("[3] - Hotels")
+                    .Append("[3] - Hotels in...")
                     .AppendLine()
                     .Append("[4] - Leaving on...")
                     .AppendLine()
@@ -229,6 +232,26 @@ namespace TravelSimulator.View
             Console.WriteLine(ListPageMenu());
             Console.WriteLine(ListPageOptions());
             Console.WriteLine(Footer());
+        }
+
+        //----Countries:----
+        private static string ListCountriesMenu()
+        {
+            StringBuilder home = new StringBuilder();
+            return home.Append('-', 16).Append("COUNTRIES:").Append('-', 16).AppendLine().ToString();
+        }
+        
+        public static void PrintListCountries()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(ListCountriesMenu(), Environment.NewLine);
+            TravelSimulatorContext context = new TravelSimulatorContext();
+            foreach (Country country in context.Countries)
+            {
+                Console.WriteLine(country.CountryName);
+            }
+            Console.WriteLine(GoBackMessage());
         }
 
         //--------------------------//
