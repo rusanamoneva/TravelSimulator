@@ -40,14 +40,13 @@ namespace TravelSimulator.Services
             int addedCountryId = GetCountryByName(countryName).Id;
             return addedCountryId;
         }
-
-
+        
         //not tested
         public string DeleteCountry(string countryName)
         {
             if (GetCountryByName(countryName) == null)
             {
-                throw new ArgumentException("Country does not exist.");
+                throw new ArgumentException("Country not found.");
             }
 
             Country countryToRemove = GetCountryByName(countryName);
@@ -65,7 +64,7 @@ namespace TravelSimulator.Services
 
             if (searchedCountry == null)
             {
-                throw new ArgumentException("Country does not exist.");
+                throw new ArgumentException("Country not found.");
             }
 
             return searchedCountry;

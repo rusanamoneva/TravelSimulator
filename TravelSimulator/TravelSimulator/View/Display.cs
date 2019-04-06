@@ -27,6 +27,10 @@ namespace TravelSimulator.View
             return footer.AppendLine().Append('=', 42).AppendLine().Append("[0] - Back").ToString();
         }
 
+        public static string GoBackMessage()
+        {
+            return Environment.NewLine + "Press any key to go back.";
+        }
         //--------------------------//
 
         //Home page elements:
@@ -130,6 +134,45 @@ namespace TravelSimulator.View
             Console.WriteLine("Enter name of country:");
         }
 
+        public static void AddedCountryMessage(string countryName)
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(AddCountryPageMenu());
+            Console.WriteLine($"Successfully added {countryName}.");
+            Console.WriteLine(GoBackMessage());
+        }
+        
+        //Add town elements:
+        //----Add a new town----
+        private static string AddTownPageMenu()
+        {
+            StringBuilder home = new StringBuilder();
+            return home.Append('-', 14).Append("ADD A NEW TOWN").Append('-', 14).AppendLine().ToString();
+        }
+
+        public static void PrintAddTownPage()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(AddTownPageMenu());
+            Console.WriteLine("First, enter name of country:");
+        }
+
+        public static void PrintAddTownBottom()
+        {
+            Console.WriteLine("Now enter name of town:");
+        }
+
+        public static void AddedTownMessage(string countryName, string townName)
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(AddTownPageMenu());
+            Console.WriteLine($"Successfully added {townName} in {countryName}.");
+            Console.WriteLine(GoBackMessage());
+        }
+
         //--------------------------//
 
         //Find page elements:
@@ -204,10 +247,6 @@ namespace TravelSimulator.View
             Console.WriteLine(Header());
             Console.WriteLine(ErrorMenu());
         }
-
-        public static string GoBackMessage()
-        {
-            return Environment.NewLine + "Press any key to go back.";
-        }
+        
     }
 }
