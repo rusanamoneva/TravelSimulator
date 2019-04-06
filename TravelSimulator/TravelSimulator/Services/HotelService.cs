@@ -36,7 +36,7 @@ namespace TravelSimulator.Services
 
             if (town.Hotels.FirstOrDefault(x => x.HotelName == hotelName) != null)
             {
-                throw new InvalidOperationException("Hotel already exists!");
+                throw new InvalidOperationException("Hotel already exists.");
             }
 
             context.Hotels.Add(hotel);
@@ -83,6 +83,7 @@ namespace TravelSimulator.Services
 
 
             hotel.Stars++;
+            hotel.PricePerNight += 10;
             context.SaveChanges();
 
             int newStars = hotel.Stars;
@@ -97,6 +98,7 @@ namespace TravelSimulator.Services
 
 
             hotel.Stars--;
+            hotel.PricePerNight -= 10;
             context.SaveChanges();
 
             int newStars = hotel.Stars;
@@ -120,7 +122,7 @@ namespace TravelSimulator.Services
 
             if (hotelsInTown.Count == 0)
             {
-                throw new InvalidOperationException($"No hotels to be shown in {townName}");
+                throw new InvalidOperationException($"No hotels to be shown in {townName}.");
             }
 
             return hotelsInTown;
@@ -147,7 +149,7 @@ namespace TravelSimulator.Services
 
             if (town.TownName == null)
             {
-                throw new InvalidOperationException("Town does not exists!");
+                throw new InvalidOperationException("Town not found.");
             }
 
             return town;
@@ -174,7 +176,7 @@ namespace TravelSimulator.Services
 
             if (country.CountryName == null)
             {
-                throw new InvalidOperationException("Town should be in a valid country! This country does not exist!");
+                throw new InvalidOperationException("Country not found.");
             }
 
             return country;
@@ -198,7 +200,7 @@ namespace TravelSimulator.Services
 
             if (hotel.HotelName == null)
             {
-                throw new InvalidOperationException($"Hotel {hotelName} does not exist in {townName}");
+                throw new InvalidOperationException($"Hotel {hotelName} not found in {townName}.");
             }
 
             return hotel;

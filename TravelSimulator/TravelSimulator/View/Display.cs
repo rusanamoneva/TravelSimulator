@@ -52,13 +52,12 @@ namespace TravelSimulator.View
                     .AppendLine()
                     .Append("[1] - Add new...")
                     .AppendLine()
-                    .Append("[2] - Find...")
+                    .Append("[2] - List...")
                     .AppendLine()
-                    .Append("[3] - List...")
+                    .Append("[3] - Change...")
                     .AppendLine()
-                    .Append("[4] - Change...")
+                    .Append("[4] - Remove...")
                     .AppendLine()
-                    .Append("[5] - Remove...")
                     .AppendLine()
                     .AppendLine();
 
@@ -184,23 +183,33 @@ namespace TravelSimulator.View
             return home.Append('-', 13).Append("ADD A NEW HOTEL:").Append('-', 13).AppendLine().ToString();
         }
 
-        //--------------------------//
-
-        //Find page elements:
-        //----FIND----
-        private static string FindPageMenu()
-        {
-            StringBuilder home = new StringBuilder();
-            return home.Append('-', 19).Append("FIND").Append('-', 19).AppendLine().ToString();
-        }
-
-        public static void PrintFindPage()
+        public static void PrintAddHotelPage()
         {
             Console.Clear();
             Console.WriteLine(Header());
-            Console.WriteLine(FindPageMenu());
+            Console.WriteLine(AddHotelPageMenu());
+            Console.WriteLine("First, enter name of country:");
         }
 
+        public static void PrintAddHotelMiddle()
+        {
+            Console.WriteLine("Now enter name of town:");
+        }
+
+        public static void PrintAddHotelBottom()
+        {
+            Console.WriteLine("Enter Hotel name:");
+        }
+
+        public static void AddedHotelMessage(string townName, string hotelName)
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(AddHotelPageMenu());
+            Console.WriteLine($"Successfully added {hotelName} in {townName}.");
+            Console.WriteLine(GoBackMessage());
+        }
+        
         //--------------------------//
 
         //List page elements:
@@ -223,11 +232,9 @@ namespace TravelSimulator.View
                     .AppendLine()
                     .Append("[3] - Hotels in...")
                     .AppendLine()
-                    .Append("[4] - Leaving on...")
+                    .Append("[4] - Tourists...")
                     .AppendLine()
-                    .Append("[5] - Arriving on...")
                     .AppendLine()
-                    .Append("[6] - Tourists")
                     .AppendLine();
 
             return options.ToString();
@@ -259,6 +266,151 @@ namespace TravelSimulator.View
             {
                 Console.WriteLine(country.CountryName);
             }
+            Console.WriteLine(GoBackMessage());
+        }
+
+        //----Towns:----
+        private static string ListTownsMenu()
+        {
+            StringBuilder home = new StringBuilder();
+            return home.Append('-', 18).Append("TOWNS:").Append('-', 18).AppendLine().ToString();
+        }
+
+        public static void PrintListTowns()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(ListTownsMenu());
+            Console.WriteLine("Enter name of country:");
+        }
+
+        public static void PrintListTownsBottom(string countryName)
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(ListTownsMenu());
+            Console.WriteLine($"Towns in {countryName}:" + Environment.NewLine);
+            Services.TownService townService = new Services.TownService();
+            foreach (Town town in townService.ShowAllTownsInCountry(countryName))
+            {
+                Console.WriteLine(town.TownName);
+            }
+            Console.WriteLine(GoBackMessage());
+        }
+
+        //----Hotels----
+        private static string ListHotelsMenu()
+        {
+            StringBuilder home = new StringBuilder();
+            return home.Append('-', 18).Append("HOTELS").Append('-', 18).AppendLine().ToString();
+        }
+
+        public static void PrintListHotels()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(ListHotelsMenu());
+            Console.WriteLine("Enter name of country:");
+        }
+
+        public static void PrintListHotelsMiddle()
+        {
+            Console.WriteLine("Now enter name of town:");
+        }
+
+        public static void PrintListHotelsBottom(string countryName, string townName)
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(ListHotelsMenu());
+            Console.WriteLine($"Hotels in {townName}:" + Environment.NewLine);
+            Services.HotelService hotelService = new Services.HotelService();
+            foreach (Data.Models.Hotel hotel in hotelService.ShowAllHotelsInTown(countryName, townName))
+            {
+                Console.WriteLine(hotel.ToString());
+            }
+            Console.WriteLine(GoBackMessage());
+        }
+
+        //----List tourists...----
+        private static string ListTouristsMenu()
+        {
+            StringBuilder home = new StringBuilder();
+            return home.Append('-', 13).Append("LIST TOURISTS...").Append('-', 13).AppendLine().ToString();
+        }
+
+        //Buttons
+        private static string ListTouristsOptions()
+        {
+            StringBuilder options = new StringBuilder();
+            options.AppendLine()
+                    .AppendLine()
+                    .Append("[1] - By home country...")
+                    .AppendLine()
+                    .Append("[2] - By hotel...")
+                    .AppendLine()
+                    .AppendLine()
+                    .AppendLine()
+                    .AppendLine()
+                    .AppendLine();
+
+            return options.ToString();
+        }
+
+        public static void PrintListTouristsPage()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(ListTouristsMenu());
+            Console.WriteLine(ListTouristsOptions());
+            Console.WriteLine(Footer());
+        }
+
+        public static void PrintListTouristsByCountry()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(ListTouristsMenu());
+            Console.WriteLine("Enter name of country:");
+        }
+
+        public static void PrintListTouristsByHotel()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(ListTouristsMenu());
+            Console.WriteLine("Enter name of country:");
+        }
+
+        public static void ListTouristsByCountry(string countryName)
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(ListTouristsMenu());
+            Console.WriteLine($"Tourists from {countryName}:" + Environment.NewLine);
+
+            Services.TouristService touristService = new Services.TouristService();
+            foreach (Tourist tourist in touristService.ShowAllTouristsByCountryTheyComeFrom(countryName))
+            {
+                Console.WriteLine(tourist.ToString());
+            }
+
+            Console.WriteLine(GoBackMessage());
+        }
+
+        public static void ListTouristsByHotel(string countryName, string townName, string hotelName)
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(ListTouristsMenu());
+            Console.WriteLine($"Tourists in {hotelName}:" + Environment.NewLine);
+
+            Services.VoucherService voucherService = new Services.VoucherService();
+            foreach (Tourist tourist in voucherService.GetAllTouristsByHotel(countryName, townName, hotelName))
+            {
+                Console.WriteLine(tourist.ToString());
+            }
+
             Console.WriteLine(GoBackMessage());
         }
 

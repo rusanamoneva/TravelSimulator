@@ -19,13 +19,7 @@ namespace TravelSimulator.Services
         Hotel FindHotelByName(string hotelName, Town town);
 
         int AddStarToHotel(string countryName, string townName, string hotelName);
-<<<<<<< HEAD
 
         int RemoveStarFromHotel(string countryName, string townName, string hotelName);
-
-=======
-        
-        int RemoveStarFromHotel(string countryName, string townName, string hotelName);
->>>>>>> 2d53135e0034ac6b5bdfd67dee919ec66cb95912
     }
 }

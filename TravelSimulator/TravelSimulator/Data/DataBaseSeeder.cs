@@ -26,16 +26,6 @@ namespace TravelSimulator.Data
 
         public void SeedTableCountry()
         {
-            //countryService.AddCountry("Germany");
-            //countryService.AddCountry("Greece");
-            //countryService.AddCountry("Serbia");
-            //countryService.AddCountry("France");
-            //countryService.AddCountry("Russia");
-            //countryService.AddCountry("Turkey");
-            //countryService.AddCountry("Hungary");
-            //countryService.AddCountry("Austria");
-            //countryService.AddCountry("Norway");
-
             countryService.AddCountry("Bulgaria");
             countryService.AddCountry("Germany");
             countryService.AddCountry("Greece");
@@ -125,10 +115,10 @@ namespace TravelSimulator.Data
             hotelService.AddHotel("Bulgaria", "Bansko", "Grand Hotel Bansko", 4, 55);
             hotelService.AddHotel("Bulgaria", "Bansko", "Campanella", 3, 60);
 
-            hotelService.AddHotel("Bulgaria", "Borovets", "Lion", 4, 50);
+            hotelService.AddHotel("Bulgaria", "Borovets", "Lion", 4, 40);
             hotelService.AddHotel("Bulgaria", "Borovets", "Samokov", 3, 40);
             hotelService.AddHotel("Bulgaria", "Borovets", "Borovets Hills", 5, 100);
-            hotelService.AddHotel("Bulgaria", "Borovets", "Flora", 4, 80);
+            hotelService.AddHotel("Bulgaria", "Borovets", "Flora", 4, 50);
 
             hotelService.AddHotel("Bulgaria", "Velingrad", "Select", 4, 65);
             hotelService.AddHotel("Bulgaria", "Velingrad", "Zdravets", 3, 55);
