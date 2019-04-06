@@ -11,7 +11,7 @@ namespace TravelSimulator.Data.Models
 
         private int stars;
 
-        private decimal InitialPricePerNight;
+        private decimal initialPricePerNight;
 
         public int Id { get; set; }
 
@@ -32,7 +32,7 @@ namespace TravelSimulator.Data.Models
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException("Name should be more that 1 character.");
+                    throw new ArgumentException("Name should be more than 1 character.");
                 }
 
                 this.hotelName = value;
@@ -55,15 +55,15 @@ namespace TravelSimulator.Data.Models
 
         public decimal PricePerNight
         {
-            get { return this.InitialPricePerNight + this.Stars*10; }
+            get { return this.initialPricePerNight; }
             set
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException("Initial price should be more than 0.");
+                    throw new ArgumentException("Price should be more than 0.");
                 }
 
-                this.InitialPricePerNight = value;
+                this.initialPricePerNight = value;
             }
         }
 
@@ -71,6 +71,7 @@ namespace TravelSimulator.Data.Models
         {
             StringBuilder sb = new StringBuilder();
 
+<<<<<<< HEAD
             sb.Append($"Hotel name: {this.HotelName} ")
                 .Append($"Town: {this.Town.TownName} ")
                 .Append($"Stars: {this.Stars} ")
@@ -80,6 +81,12 @@ namespace TravelSimulator.Data.Models
                 .Append('*', this.Stars).AppendLine()
                 .Append($"Town: {this.Town.TownName}").AppendLine()
                 .Append($"Price per night: {this.PricePerNight :2f}lv.");
+=======
+            sb.Append($"Hotel: {this.HotelName} ")
+                .Append('*', this.Stars).AppendLine()
+                .Append($"Town: {this.Town.TownName}").AppendLine()
+                .Append($"Price per night: {this.initialPricePerNight:f2}lv.");
+>>>>>>> fdcd898c706786c67f42bb8a10c300333962d910
 
             return sb.ToString();
         }

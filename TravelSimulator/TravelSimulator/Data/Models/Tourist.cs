@@ -31,7 +31,7 @@ namespace TravelSimulator.Models
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException("Invalid name! It should be longer that 1 character.");
+                    throw new ArgumentException("Name should be more that 1 character.");
                 }
 
                 this.touristFirstName = value;
@@ -45,7 +45,7 @@ namespace TravelSimulator.Models
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException("Invalid name! It should be longer that 1 character.");
+                    throw new ArgumentException("Name should be more that 1 character.");
                 }
 
                 this.touristLastName = value;
@@ -59,7 +59,7 @@ namespace TravelSimulator.Models
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException("Invalid age! Age should be more than 0.");
+                    throw new ArgumentException("Age should be more than 0.");
                 }
 
                 this.age = value;
@@ -73,7 +73,7 @@ namespace TravelSimulator.Models
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException("Invalid country name! It should be more than 1 character.");
+                    throw new ArgumentException("Country name should be more than 1 character.");
                 }
 
                 countryName = value;
@@ -82,13 +82,7 @@ namespace TravelSimulator.Models
 
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-
-            sb.Append($"First name: {this.TouristFirstName} ")
-                .Append($"Last name: {this.TouristLastName} ")
-                .Append($"Age: {this.Age}");
-
-            return sb.ToString();
+            return $"{this.TouristFirstName} {this.TouristLastName} - {this.Age}";
         }
     }
 }

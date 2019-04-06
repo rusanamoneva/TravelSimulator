@@ -36,7 +36,7 @@ namespace TravelSimulator.Services
 
             if (town.Hotels.FirstOrDefault(x => x.HotelName == hotelName) != null)
             {
-                throw new InvalidOperationException("Hotel already exists!");
+                throw new InvalidOperationException("Hotel already exists.");
             }
 
             context.Hotels.Add(hotel);
@@ -83,6 +83,7 @@ namespace TravelSimulator.Services
 
 
             hotel.Stars++;
+            hotel.PricePerNight += 10;
             context.SaveChanges();
 
             int newStars = hotel.Stars;
@@ -97,6 +98,7 @@ namespace TravelSimulator.Services
 
 
             hotel.Stars--;
+            hotel.PricePerNight -= 10;
             context.SaveChanges();
 
             int newStars = hotel.Stars;
@@ -120,7 +122,7 @@ namespace TravelSimulator.Services
 
             if (hotelsInTown.Count == 0)
             {
-                throw new InvalidOperationException($"No hotels to be shown in {townName}");
+                throw new InvalidOperationException($"No hotels to be shown in {townName}.");
             }
 
             return hotelsInTown;
@@ -187,7 +189,7 @@ namespace TravelSimulator.Services
 
             if (town.TownName == null)
             {
-                throw new InvalidOperationException("Town does not exists!");
+                throw new InvalidOperationException("Town not found.");
             }
 
             return town;
@@ -214,11 +216,38 @@ namespace TravelSimulator.Services
 
             if (country.CountryName == null)
             {
-                throw new InvalidOperationException("Town should be in a valid country! This country does not exist!");
+                throw new InvalidOperationException("Country not found.");
             }
 
             return country;
         }
+<<<<<<< HEAD
+=======
+
+        public Hotel FindHotelByName(string hotelName, Town town)
+        {
+            Hotel hotel = new Hotel();
+
+            string townName = town.TownName;
+
+            foreach (Hotel item in context.Hotels)
+            {
+                if (item.Town.Country.CountryName == town.Country.CountryName
+                    && item.Town.TownName == townName
+                    && item.HotelName == hotelName)
+                {
+                    hotel = item;
+                }
+            }
+
+            if (hotel.HotelName == null)
+            {
+                throw new InvalidOperationException($"Hotel {hotelName} not found in {townName}.");
+            }
+
+            return hotel;
+        }
+>>>>>>> fdcd898c706786c67f42bb8a10c300333962d910
     }
 }
 
