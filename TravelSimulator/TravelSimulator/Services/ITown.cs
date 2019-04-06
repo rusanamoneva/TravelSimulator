@@ -17,5 +17,7 @@ namespace TravelSimulator.Services
         //List<Hotel> ShowAllHotelsInTown(string countryName, string townName);
 
         Town GetTownByName(string countryName, string townName);
+
+        string DeleteTownByCountry(string countryName);
     }
 }

@@ -155,6 +155,7 @@ namespace TravelSimulator.View
                         //View.Display.PrintAddPage();
                         break;
                 }
+
             } while (keyValue != "D0");
         }
 

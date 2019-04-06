@@ -23,5 +23,7 @@ namespace TravelSimulator.Services
         List<Tourist> GetAllTouristsByHotel(string countryName, string townName, string hotelName);
 
         decimal GetPriceWithDiscount(int voucherId, decimal discountPercent);
+
+        string DeleteVoucherByCountry(string countryName);
     }
 }

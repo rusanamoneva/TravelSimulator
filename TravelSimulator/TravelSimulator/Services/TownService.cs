@@ -117,6 +117,21 @@ namespace TravelSimulator.Services
 
         }
 
+        public string DeleteTownByCountry(string countryName)
+        {
+            foreach (Town town in context.Towns)
+            {
+                if (town.Country.CountryName == countryName)
+                {
+                    DeleteTown(countryName, town.TownName);
+                }
+            }
+
+            string result = "Towns deleted.";
+
+            return result;
+        }
+
         private Country FindCountryByName(string countryName)
         {
             Country country = new Country();
