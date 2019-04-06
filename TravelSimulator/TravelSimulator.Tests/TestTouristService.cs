@@ -83,7 +83,7 @@ namespace TravelSimulator.Tests
             mockContext.Setup(c => c.Tourists).Returns(mockSet.Object);
 
             var service = new TouristService(mockContext.Object);
-            int updatedTouristAge = service.ChangeTouristAge(10, 21);
+            int updatedTouristAge = service.ChangeTouristAge(10);
 
             int expectedTouristAge = 21;
 
@@ -100,7 +100,7 @@ namespace TravelSimulator.Tests
 
             var service = new TouristService(mockContext.Object);
 
-            Assert.Throws<InvalidOperationException>(() => service.ChangeTouristAge(27, 52));
+            Assert.Throws<InvalidOperationException>(() => service.ChangeTouristAge(27));
         }
 
         private static Mock<DbSet<Tourist>> SeedDataBase()

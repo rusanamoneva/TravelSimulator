@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using TravelSimulator.Data.Models;
 
 namespace TravelSimulator.Models
@@ -34,9 +35,11 @@ namespace TravelSimulator.Models
 
         public override string ToString()
         {
-            string result = this.TownName;
+            StringBuilder sb = new StringBuilder();
 
-            return result;
+            sb.Append($"Town id: {this.Id} ").Append($"Town name: {this.townName}");
+
+            return sb.ToString();
         }
     }
 }

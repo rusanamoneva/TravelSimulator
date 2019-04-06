@@ -6,7 +6,7 @@ using TravelSimulator.Models;
 
 namespace TravelSimulator.Services
 {
-    public interface ITown
+    public interface ITownService
     {
         int AddTown(string countryName, string townName);
 

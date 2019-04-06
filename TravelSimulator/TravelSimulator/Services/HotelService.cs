@@ -8,20 +8,23 @@ using TravelSimulator.Models;
 
 namespace TravelSimulator.Services
 {
-    public class HotelService : IHotel
+    public class HotelService : IHotelService
     {
         private TravelSimulatorContext context;
 
+        //Used in the View
         public HotelService()
         {
             this.context = new TravelSimulatorContext();
         }
 
+        //Used forn Unit tests
         public HotelService(TravelSimulatorContext cont)
         {
             this.context = cont;
         }
 
+        //If the parameters are valid the method adds the hotel in the database
         public int AddHotel(string countryName, string townName, string hotelName, int stars, decimal pricePerNight)
         {
             Country country = FindCountryByName(countryName);
@@ -48,6 +51,8 @@ namespace TravelSimulator.Services
             return result;
         }
 
+        //Is hotel is contained in the database the method removes the hotel
+        //Otherwise the method throws exception
         public string RemoveHotel(string countryName, string townName, string hotelName)
         {
             Country country = FindCountryByName(countryName);
@@ -64,6 +69,7 @@ namespace TravelSimulator.Services
         }
 
         //Tested
+        //The method changes hotel price according to a new price
         public decimal ChangeHotelPrice(string countryName, string townName, string hotelName, decimal newPrice)
         {
             Town town = FindTownByName(countryName, townName);
@@ -76,6 +82,7 @@ namespace TravelSimulator.Services
         }
 
         //Tested
+        //If parameters are valid the method adds a star to a hotel and saves the changes in the database
         public int AddStarToHotel(string countryName, string townName, string hotelName)
         {
             Town town = FindTownByName(countryName, townName);
@@ -91,6 +98,7 @@ namespace TravelSimulator.Services
         }
 
         //Tested
+        //If parameters are valid the method removes a star from a hotel and saves the changes in the database
         public int RemoveStarFromHotel(string countryName, string townName, string hotelName)
         {
             Town town = FindTownByName(countryName, townName);
@@ -105,6 +113,7 @@ namespace TravelSimulator.Services
             return newStars;
         }
 
+        //Lists all hotels in a town if there are hotels in the town
         public List<Hotel> ShowAllHotelsInTown(string countryName, string townName)
         {
             Town town = FindTownByName(countryName, townName);
@@ -128,6 +137,7 @@ namespace TravelSimulator.Services
             return hotelsInTown;
         }
 
+        //Returns hotel by name if hotel is contained in the database
         public Hotel FindHotelByName(string hotelName, Town town)
         {
             Hotel hotel = new Hotel();
@@ -152,6 +162,8 @@ namespace TravelSimulator.Services
             return hotel;
         }
 
+        //Deletes all hotels in specific country
+        //Used when deleting country form the database
         public string DeleteHotelByCountry(string countryName)
         {
             foreach (Hotel hotel in context.Hotels)
@@ -168,6 +180,8 @@ namespace TravelSimulator.Services
             return result;
         }
 
+        //Deletes all hotels in specific town
+        //Used when deleting town form the database
         public string DeleteHotelByTown(string townName)
         {
             foreach (Hotel hotel in context.Hotels)
@@ -184,6 +198,7 @@ namespace TravelSimulator.Services
             return result;
         }
 
+        //To validate data - town
         private Town FindTownByName(string countryName, string townName)
         {
             //if (FindCountryByName(countryName).Towns.FirstOrDefault(x => x.TownName == townName) == null)
@@ -211,6 +226,7 @@ namespace TravelSimulator.Services
             return town;
         }
 
+        //To validate data - country
         private Country FindCountryByName(string countryName)
         {
             //if (context.Countries.FirstOrDefault(x => x.CountryName == countryName) == null)

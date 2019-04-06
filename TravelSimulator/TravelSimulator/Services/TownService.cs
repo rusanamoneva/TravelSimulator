@@ -8,21 +8,25 @@ using TravelSimulator.Models;
 
 namespace TravelSimulator.Services
 {
-    public class TownService : ITown
+    public class TownService : ITownService
     {
         private TravelSimulatorContext context;
 
+        //Used in the View
         public TownService()
         {
             this.context = new TravelSimulatorContext();
         }
 
+        //Used for Unit Tests
         public TownService(TravelSimulatorContext cont)
         {
             this.context = cont;
         }
 
         //working
+        //Adds town in the database
+        //If town is contained in the database, the method throws exception
         public int AddTown(string countryName, string townName)
         {
             Country country = FindCountryByName(countryName);
@@ -45,6 +49,8 @@ namespace TravelSimulator.Services
             return GetTownByName(countryName, townName).Id;
         }
 
+        //Deletes town from the database
+        //If town is not contained in the database, the method throws exception
         public string DeleteTown(string countryName, string townName)
         {
             Country country = FindCountryByName(countryName);
@@ -58,6 +64,8 @@ namespace TravelSimulator.Services
         }
 
         //Tested
+        //Lists all towns in a specific country
+        //If there are no towns in the country, the method throws exception
         public List<Town> ShowAllTownsInCountry(string countryName)
         {
             Country country = FindCountryByName(countryName);
@@ -80,22 +88,9 @@ namespace TravelSimulator.Services
             return towns;
         }
 
-        //public List<Hotel> ShowAllHotelsInTown(string countryName, string townName)
-        //{
-        //    Country country = FindCountryByName(countryName);
-        //    Town town = FindTownByName(countryName, townName);
-
-        //    List<Hotel> hotelsInTown = town.Hotels.ToList();
-
-        //    if (hotelsInTown.Count == 0)
-        //    {
-        //        throw new InvalidOperationException($"No hotels to be shown in {townName}");
-        //    }
-
-        //    return hotelsInTown;
-        //}
-
         //Tested
+        //Returns Town by name and countryName
+        //It town doesn't exist in the database, the method throws exception
         public Town GetTownByName(string countryName, string townName)
         {
             Town town = new Town();
@@ -117,6 +112,8 @@ namespace TravelSimulator.Services
 
         }
 
+        //Deletes all towns in a specific country
+        //Used when deleting a country
         public string DeleteTownByCountry(string countryName)
         {
             foreach (Town town in context.Towns)
@@ -132,6 +129,7 @@ namespace TravelSimulator.Services
             return result;
         }
 
+        //Used to validate country
         private Country FindCountryByName(string countryName)
         {
             Country country = new Country();

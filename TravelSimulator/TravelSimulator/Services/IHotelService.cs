@@ -6,7 +6,7 @@ using TravelSimulator.Models;
 
 namespace TravelSimulator.Services
 {
-    public interface IHotel
+    public interface IHotelService
     {
         int AddHotel(string countryName, string townName, string hotelName, int stars, decimal pricePerNight);
 

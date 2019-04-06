@@ -82,7 +82,7 @@ namespace TravelSimulator.Models
 
         public override string ToString()
         {
-            return $"{this.TouristFirstName} {this.TouristLastName} - {this.Age}";
+            return $"{this.TouristFirstName} {this.TouristLastName} - Age: {this.Age}";
         }
     }
 }

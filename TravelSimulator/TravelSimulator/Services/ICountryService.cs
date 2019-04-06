@@ -5,7 +5,7 @@ using TravelSimulator.Models;
 
 namespace TravelSimulator.Services
 {
-    public interface ICountry
+    public interface ICountryService
     {
         int AddCountry(string countryName);
 

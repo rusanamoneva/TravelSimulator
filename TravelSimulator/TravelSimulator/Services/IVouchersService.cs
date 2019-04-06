@@ -6,7 +6,7 @@ using TravelSimulator.Models;
 
 namespace TravelSimulator.Services
 {
-    public interface IVoucher
+    public interface IVouchersService
     {
         string CreateVoucher(Tourist tourist, Hotel hotel, int daysOfTrip, decimal tripPrice, int cancellationPeriod, DateTime startDate, DateTime endDate);
 

@@ -152,16 +152,19 @@ namespace TravelSimulator.Data
             DateTime startDate = new DateTime(2019, 07, 10);
             DateTime endDate = new DateTime(2019, 07, 17);
             voucherService.CreateVoucher(tourist, hotel, 7, 0, 10, startDate, endDate);
+            //voucherService.DeleteVoucher(tourist, hotel);
 
             Tourist tourist2 = touristService.GetTouristById(2);
             DateTime startDate2 = new DateTime(2019, 08, 01);
             DateTime endDate2 = new DateTime(2019, 08, 15);
             voucherService.CreateVoucher(tourist2, hotel, 15, 0, 20, startDate2, endDate2);
+            //voucherService.DeleteVoucher(tourist2, hotel);
 
             Tourist tourist3 = touristService.GetTouristById(3);
             DateTime startDate3 = new DateTime(2019, 06, 21);
             DateTime endDate3 = new DateTime(2019, 06, 26);
             voucherService.CreateVoucher(tourist3, hotel, 5, 0, 7, startDate3, endDate3);
+            //voucherService.DeleteVoucher(tourist3, hotel);
 
             Town town2 = townService.GetTownByName("Bulgaria", "Bansko");
             Hotel hotel2 = hotelService.FindHotelByName("Campanella", town2);
@@ -169,52 +172,64 @@ namespace TravelSimulator.Data
             DateTime startDate4 = new DateTime(2019, 10, 17);
             DateTime endDate4 = new DateTime(2019, 10, 29);
             voucherService.CreateVoucher(tourist4, hotel2, 12, 0, 15, startDate4, endDate4);
+            //voucherService.DeleteVoucher(tourist4, hotel2);
 
             Tourist tourist5 = touristService.GetTouristById(5);
             DateTime startDate5 = new DateTime(2019, 12, 01);
             DateTime endDate5 = new DateTime(2019, 12, 10);
             voucherService.CreateVoucher(tourist5, hotel2, 10, 0, 10, startDate5, endDate5);
+            //voucherService.DeleteVoucher(tourist5, hotel2);
 
             Hotel hotel3 = hotelService.FindHotelByName("Majestic", town);
             Tourist tourist6 = touristService.GetTouristById(6);
             DateTime startDate6 = new DateTime(2019, 06, 19);
             DateTime endDate6 = new DateTime(2019, 06, 29);
             voucherService.CreateVoucher(tourist6, hotel3, 10, 0, 15, startDate6, endDate6);
+            //voucherService.DeleteVoucher(tourist6, hotel3);
 
             Tourist tourist7 = touristService.GetTouristById(7);
             DateTime startDate7 = new DateTime(2019, 08, 03);
             DateTime endDate7 = new DateTime(2019, 08, 13);
             voucherService.CreateVoucher(tourist7, hotel3, 10, 0, 10, startDate7, endDate7);
-          
+            //voucherService.DeleteVoucher(tourist7, hotel3);
+
             Town town3 = townService.GetTownByName("Bulgaria", "Borovets");
             Hotel hotel4 = hotelService.FindHotelByName("Samokov", town3);
             Tourist tourist9 = touristService.GetTouristById(9);
             DateTime startDate9 = new DateTime(2019, 10, 17);
             DateTime endDate9 = new DateTime(2019, 10, 29);
             voucherService.CreateVoucher(tourist9, hotel4, 12, 0, 15, startDate9, endDate9);
+            //voucherService.DeleteVoucher(tourist9, hotel4);
 
             Tourist tourist8 = touristService.GetTouristById(8);
             voucherService.CreateVoucher(tourist8, hotel, 10, 0, 15, startDate6, endDate6);
-          
+            //voucherService.DeleteVoucher(tourist8, hotel);
+
             Tourist tourist10 = touristService.GetTouristById(10);
             DateTime startDate10 = new DateTime(2019, 11, 17);
             DateTime endDate10 = new DateTime(2019, 11, 29);
             voucherService.CreateVoucher(tourist10, hotel4, 12, 0, 15, startDate10, endDate10);
+            //voucherService.DeleteVoucher(tourist10, hotel4);
 
             Tourist tourist11 = touristService.GetTouristById(11);
             voucherService.CreateVoucher(tourist11, hotel, 7, 0, 10, startDate, endDate);
+            //voucherService.DeleteVoucher(tourist11, hotel);
 
             Tourist tourist12 = touristService.GetTouristById(12);
             voucherService.CreateVoucher(tourist12, hotel3, 7, 0, 10, startDate, endDate);
+            //voucherService.DeleteVoucher(tourist12, hotel3);
 
             Tourist tourist13 = touristService.GetTouristById(13);
             voucherService.CreateVoucher(tourist13, hotel3, 7, 0, 10, startDate, endDate);
+            //voucherService.DeleteVoucher(tourist13, hotel3);
 
             Tourist tourist14 = touristService.GetTouristById(14);
             voucherService.CreateVoucher(tourist14, hotel, 10, 0, 15, startDate6, endDate6);
+            //voucherService.DeleteVoucher(tourist14, hotel);
 
             Tourist tourist15 = touristService.GetTouristById(15);
             voucherService.CreateVoucher(tourist15, hotel, 10, 0, 15, startDate6, endDate6);
+            //voucherService.DeleteVoucher(tourist15, hotel);
         }
     }
 }

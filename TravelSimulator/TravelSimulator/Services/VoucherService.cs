@@ -8,7 +8,7 @@ using TravelSimulator.Models;
 
 namespace TravelSimulator.Services
 {
-    public class VoucherService : IVoucher
+    public class VoucherService : IVouchersService
     {
         private TravelSimulatorContext context;
 
@@ -22,16 +22,19 @@ namespace TravelSimulator.Services
             this.context = cont;
         }
 
+        //Created voucher and adds it to the database
         public string CreateVoucher(Tourist tourist, Hotel hotel, int daysOfTrip, decimal tripPrice, int cancellationPeriod, DateTime startDate, DateTime endDate)
         {
             ValidateData(tourist, hotel);
+
+            decimal totalTripPrice = CalculateTripPriceForVoucher(daysOfTrip, hotel.PricePerNight);
 
             Voucher voucher = new Voucher()
             {
                 Tourist = tourist,
                 Hotel = hotel,
                 DaysOfTrip = daysOfTrip,
-                TripPrice = tripPrice,
+                TripPrice = totalTripPrice,
                 CancellationPeriod = cancellationPeriod,
                 StartDate = startDate,
                 EndDate = endDate
@@ -45,13 +48,14 @@ namespace TravelSimulator.Services
             return result;
         }
 
+        //Deletes the voucher of a tourist from the database
         public string DeleteVoucher(Tourist tourist, Hotel hotel)
         {
             Voucher voucherToDelete = new Voucher();
 
-            foreach (Voucher voucher in context.Vouchers.Where(x => x.Hotel == hotel))
+            foreach (Voucher voucher in context.Vouchers.Where(x => x.Hotel.HotelName == hotel.HotelName))
             {
-                if (voucher.Tourist == tourist)
+                if (voucher.Tourist.TouristFirstName == tourist.TouristFirstName)
                 {
                     voucherToDelete = voucher;
                 }
@@ -66,6 +70,7 @@ namespace TravelSimulator.Services
         }
 
         //Tested
+        //Calculates the price ot the trip by days of trip and hotel price per night
         public decimal CalculateTripPrice(int voucherId)
         {
             Voucher voucher = FindVoucherById(voucherId);
@@ -88,6 +93,7 @@ namespace TravelSimulator.Services
         }
 
         //Tested
+        //Lists the vouchers of all arrivals on a specific date
         public List<Voucher> GetArrtivalsByDate(DateTime startDate)
         {
             List<Voucher> vouchersOfArrivals = new List<Voucher>();
@@ -109,6 +115,7 @@ namespace TravelSimulator.Services
         }
 
         //Tested
+        //Lists the vouchers of all departures on a specific date
         public List<Voucher> GetDeparturesByDate(DateTime endDate)
         {
             List<Voucher> vouchersOfDepartures = new List<Voucher>();
@@ -130,6 +137,7 @@ namespace TravelSimulator.Services
         }
 
         //Tested
+        //Lists all tourists in a specific hotel
         public List<Tourist> GetAllTouristsByHotel(string countryName, string townName, string hotelName)
         {
             List<Tourist> tourists = new List<Tourist>();
@@ -153,6 +161,7 @@ namespace TravelSimulator.Services
         }
 
         //Tested
+        //Changes hotel price with a discount percent and saves the new price in the database
         public decimal GetPriceWithDiscount(int voucherId, decimal discountPercent)
         {
             Voucher voucher = FindVoucherById(voucherId);
@@ -165,6 +174,7 @@ namespace TravelSimulator.Services
             return FindVoucherById(voucherId).TripPrice;
         }
 
+        //Returns voucher by id
         public Voucher FindVoucherById(int voucherId)
         {
             Voucher voucher = context.Vouchers.FirstOrDefault(x => x.Id == voucherId);
@@ -177,6 +187,7 @@ namespace TravelSimulator.Services
             return voucher;
         }
 
+        //Lists all vouchers by the name of the tourist and the hotel for the trip
         public List<Voucher> GetAllVouchersByTouristNameAndHotel(string touristFirstName, string touristLastName, Hotel hotel)
         {
             List<Voucher> vouchers = new List<Voucher>();
@@ -199,6 +210,8 @@ namespace TravelSimulator.Services
             return vouchers;
         }
 
+        //Deletes all vouchers in a specific country
+        //Used when deleting a country form the database
         public string DeleteVoucherByCountry(string countryName)
         {
             foreach (Voucher voucher in context.Vouchers)
@@ -214,6 +227,8 @@ namespace TravelSimulator.Services
             return result;
         }
 
+        //Deletes all vouchers in a specific town
+        //Used when deleting a town form the database
         public string DeleteVoucherByTown(string townName)
         {
             foreach (Voucher voucher in context.Vouchers)
@@ -229,6 +244,16 @@ namespace TravelSimulator.Services
             return result;
         }
 
+        private decimal CalculateTripPriceForVoucher(int daysOfTrip, decimal hotelPricePerNight)
+        {
+            decimal tripPrice = 0M;
+
+            tripPrice = daysOfTrip * hotelPricePerNight;
+
+            return tripPrice;
+        }
+
+        //Validates data used in methods
         private void ValidateData(Tourist tourist, Hotel hotel)
         {
             if (context.Tourists.FirstOrDefault(x => x.TouristFirstName == tourist.TouristFirstName) == null)
@@ -241,6 +266,7 @@ namespace TravelSimulator.Services
             }
         }
 
+        //Returns a valid town used in methods
         private Town FindTownByName(string countryName, string townName)
         {
             Town town = new Town();
@@ -261,6 +287,7 @@ namespace TravelSimulator.Services
             return town;
         }
 
+        //Returns a valid country used in methods
         private Country FindCountryByName(string countryName)
         {
             Country country = new Country();
@@ -281,6 +308,7 @@ namespace TravelSimulator.Services
             return country;
         }
 
+        //Returns a valid hotel used in methods
         private Hotel FindHotelByName(string townName, string hotelName, Town town)
         {
             Hotel hotel = new Hotel();

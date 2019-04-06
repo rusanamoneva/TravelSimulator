@@ -34,9 +34,11 @@ namespace TravelSimulator.Models
 
         public override string ToString()
         {
-            string result = this.CountryName;
+            StringBuilder sb = new StringBuilder();
 
-            return result;
+            sb.Append($"Country id: {this.Id}").Append($"Country name: {this.CountryName}");
+
+            return sb.ToString();
         }
 
     }

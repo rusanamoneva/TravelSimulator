@@ -5,7 +5,7 @@ using TravelSimulator.Models;
 
 namespace TravelSimulator.Services
 {
-    public interface ITourist
+    public interface ITouristService
     {
         string RegisterTourist(string touristFirstName, string touristLastName, int age, string countryName);
 
