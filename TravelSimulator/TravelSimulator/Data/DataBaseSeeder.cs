@@ -26,15 +26,15 @@ namespace TravelSimulator.Data
 
         public void SeedTableCountry()
         {
-            countryService.AddCountry("Germany");
-            countryService.AddCountry("Greece");
-            countryService.AddCountry("Serbia");
-            countryService.AddCountry("France");
-            countryService.AddCountry("Russia");
-            countryService.AddCountry("Turkey");
-            countryService.AddCountry("Hungary");
-            countryService.AddCountry("Austria");
-            countryService.AddCountry("Norway");
+            //countryService.AddCountry("Germany");
+            //countryService.AddCountry("Greece");
+            //countryService.AddCountry("Serbia");
+            //countryService.AddCountry("France");
+            //countryService.AddCountry("Russia");
+            //countryService.AddCountry("Turkey");
+            //countryService.AddCountry("Hungary");
+            //countryService.AddCountry("Austria");
+            //countryService.AddCountry("Norway");
         }
 
         public void SeedTableTowns()

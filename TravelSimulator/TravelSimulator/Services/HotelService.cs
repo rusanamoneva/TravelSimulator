@@ -90,12 +90,6 @@ namespace TravelSimulator.Services
         }
 
         //Tested
-
-        //public int AddStarToHotel(string countryName, string townName, string hotelName)
-        //{
-        //    Town town = FindTownByName(countryName, townName);
-        //    Hotel hotel = FindHotelByName(hotelName, town);
-
         public int AddStarToHotel(string countryName, string townName, string hotelName)
         {
             Town town = FindTownByName(countryName, townName);
@@ -110,12 +104,6 @@ namespace TravelSimulator.Services
         }
 
         //Tested
-        //public int RemoveStarFromHotel(string countryName, string townName, string hotelName)
-        //{
-        //    Town town = FindTownByName(countryName, townName);
-        //    Hotel hotel = FindHotelByName(hotelName, town);
-
-        ////Tested
         public int RemoveStarFromHotel(string countryName, string townName, string hotelName)
         {
             Town town = FindTownByName(countryName, townName);
