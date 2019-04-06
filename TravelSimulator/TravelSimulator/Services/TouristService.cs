@@ -52,11 +52,11 @@ namespace TravelSimulator.Services
             return result;
         }
 
-        public int ChangeTouristAge(int id, int newAge)
+        public int ChangeTouristAge(int id)
         {
             Tourist tourist = GetTouristById(id);
 
-            tourist.Age = newAge;
+            tourist.Age++;
             context.SaveChanges();
 
             int updatedAge = context.Tourists.FirstOrDefault(x => x.Id == id).Age;

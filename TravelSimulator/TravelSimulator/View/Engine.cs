@@ -201,6 +201,7 @@ namespace TravelSimulator.View
                         RunListTouristsPage();
                         break;
                 }
+
             } while (keyValue != "D0");
         }
 

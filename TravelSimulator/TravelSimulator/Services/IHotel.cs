@@ -21,5 +21,9 @@ namespace TravelSimulator.Services
         int AddStarToHotel(string countryName, string townName, string hotelName);
 
         int RemoveStarFromHotel(string countryName, string townName, string hotelName);
+
+        string DeleteHotelByCountry(string countryName);
+
+        string DeleteHotelByTown(string townName);
     }
 }

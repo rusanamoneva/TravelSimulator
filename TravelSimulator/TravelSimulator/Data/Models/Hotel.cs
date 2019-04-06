@@ -71,6 +71,16 @@ namespace TravelSimulator.Data.Models
         {
             StringBuilder sb = new StringBuilder();
 
+            sb.Append($"Hotel name: {this.HotelName} ")
+                .Append($"Town: {this.Town.TownName} ")
+                .Append($"Stars: {this.Stars} ")
+                .Append($"Price per night: {this.PricePerNight}lv");
+
+            sb.Append($"Hotel: {this.HotelName} ")
+                .Append('*', this.Stars).AppendLine()
+                .Append($"Town: {this.Town.TownName}").AppendLine()
+                .Append($"Price per night: {this.PricePerNight :2f}lv.");
+
             sb.Append($"Hotel: {this.HotelName} ")
                 .Append('*', this.Stars).AppendLine()
                 .Append($"Town: {this.Town.TownName}").AppendLine()

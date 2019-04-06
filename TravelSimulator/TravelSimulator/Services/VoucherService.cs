@@ -83,7 +83,7 @@ namespace TravelSimulator.Services
             tripPrice = daysOfTrip * hotelPrice;
             voucher.TripPrice = tripPrice;
             context.SaveChanges();
-            
+
             return voucher.TripPrice;
         }
 
@@ -136,7 +136,7 @@ namespace TravelSimulator.Services
 
             foreach (Voucher voucher in context.Vouchers)
             {
-                if (voucher.Hotel.HotelName == hotelName 
+                if (voucher.Hotel.HotelName == hotelName
                     && voucher.Hotel.Town.Country.CountryName == countryName
                     && voucher.Hotel.Town.TownName == townName)
                 {
@@ -175,6 +175,58 @@ namespace TravelSimulator.Services
             }
 
             return voucher;
+        }
+
+        public List<Voucher> GetAllVouchersByTouristNameAndHotel(string touristFirstName, string touristLastName, Hotel hotel)
+        {
+            List<Voucher> vouchers = new List<Voucher>();
+
+            foreach (Voucher item in context.Vouchers)
+            {
+                if (item.Tourist.TouristFirstName == touristFirstName
+                    && item.Tourist.TouristLastName == touristLastName
+                    && item.Hotel.HotelName == hotel.HotelName)
+                {
+                    vouchers.Add(item);
+                }
+            }
+
+            if (vouchers.Count == 0)
+            {
+                throw new InvalidOperationException("No vouchers found.");
+            }
+
+            return vouchers;
+        }
+
+        public string DeleteVoucherByCountry(string countryName)
+        {
+            foreach (Voucher voucher in context.Vouchers)
+            {
+                if (voucher.Hotel.Town.Country.CountryName == countryName)
+                {
+                    DeleteVoucher(voucher.Tourist, voucher.Hotel);
+                }
+            }
+
+            string result = "Vouchers deleted.";
+
+            return result;
+        }
+
+        public string DeleteVoucherByTown(string townName)
+        {
+            foreach (Voucher voucher in context.Vouchers)
+            {
+                if (voucher.Hotel.Town.TownName == townName)
+                {
+                    DeleteVoucher(voucher.Tourist, voucher.Hotel);
+                }
+            }
+
+            string result = "Vouchers deleted.";
+
+            return result;
         }
 
         private void ValidateData(Tourist tourist, Hotel hotel)
@@ -249,28 +301,6 @@ namespace TravelSimulator.Services
             }
 
             return hotel;
-        }
-
-        public List<Voucher> GetAllVouchersByTouristNameAndHotel(string touristFirstName, string touristLastName, Hotel hotel)
-        {
-            List<Voucher> vouchers = new List<Voucher>();
-
-            foreach (Voucher item in context.Vouchers)
-            {
-                if (item.Tourist.TouristFirstName == touristFirstName 
-                    && item.Tourist.TouristLastName == touristLastName
-                    && item.Hotel.HotelName == hotel.HotelName)
-                {
-                    vouchers.Add(item);
-                }
-            }
-
-            if (vouchers.Count == 0)
-            {
-                throw new InvalidOperationException("No vouchers found.");
-            }
-
-            return vouchers;
         }
     }
 }

@@ -128,6 +128,62 @@ namespace TravelSimulator.Services
             return hotelsInTown;
         }
 
+        public Hotel FindHotelByName(string hotelName, Town town)
+        {
+            Hotel hotel = new Hotel();
+
+            string townName = town.TownName;
+
+            foreach (Hotel item in context.Hotels)
+            {
+                if (item.Town.Country.CountryName == town.Country.CountryName
+                    && item.Town.TownName == townName
+                    && item.HotelName == hotelName)
+                {
+                    hotel = item;
+                }
+            }
+
+            if (hotel.HotelName == null)
+            {
+                throw new InvalidOperationException($"Hotel {hotelName} does not exist in {townName}");
+            }
+
+            return hotel;
+        }
+
+        public string DeleteHotelByCountry(string countryName)
+        {
+            foreach (Hotel hotel in context.Hotels)
+            {
+                if (hotel.Town.Country.CountryName == countryName)
+                {
+                    string townName = hotel.Town.TownName;
+                    RemoveHotel(countryName, townName, hotel.HotelName);
+                }
+            }
+
+            string result = "Hotels deleted.";
+
+            return result;
+        }
+
+        public string DeleteHotelByTown(string townName)
+        {
+            foreach (Hotel hotel in context.Hotels)
+            {
+                if (hotel.Town.TownName == townName)
+                {
+                    string countryName = hotel.Town.Country.CountryName;
+                    RemoveHotel(countryName, townName, hotel.HotelName);
+                }
+            }
+
+            string result = "Hotels deleted.";
+
+            return result;
+        }
+
         private Town FindTownByName(string countryName, string townName)
         {
             //if (FindCountryByName(countryName).Towns.FirstOrDefault(x => x.TownName == townName) == null)
@@ -182,29 +238,30 @@ namespace TravelSimulator.Services
             return country;
         }
 
-        public Hotel FindHotelByName(string hotelName, Town town)
-        {
-            Hotel hotel = new Hotel();
+        //public Hotel FindHotelByName(string hotelName, Town town)
+        //{
+        //    Hotel hotel = new Hotel();
 
-            string townName = town.TownName;
+        //    string townName = town.TownName;
 
-            foreach (Hotel item in context.Hotels)
-            {
-                if (item.Town.Country.CountryName == town.Country.CountryName
-                    && item.Town.TownName == townName
-                    && item.HotelName == hotelName)
-                {
-                    hotel = item;
-                }
-            }
+        //    foreach (Hotel item in context.Hotels)
+        //    {
+        //        if (item.Town.Country.CountryName == town.Country.CountryName
+        //            && item.Town.TownName == townName
+        //            && item.HotelName == hotelName)
+        //        {
+        //            hotel = item;
+        //        }
+        //    }
 
-            if (hotel.HotelName == null)
-            {
-                throw new InvalidOperationException($"Hotel {hotelName} not found in {townName}.");
-            }
+        //    if (hotel.HotelName == null)
+        //    {
+        //        throw new InvalidOperationException($"Hotel {hotelName} not found in {townName}.");
+        //    }
 
-            return hotel;
-        }
+        //    return hotel;
+        //}
+
     }
 }
 
