@@ -11,7 +11,7 @@ namespace TravelSimulator.View
             RunHomePage();
         }
 
-        //in progress 2/4
+        //finished
         private void RunHomePage()
         {
             ConsoleKeyInfo key;
@@ -31,10 +31,10 @@ namespace TravelSimulator.View
                         RunListPage();
                         break;
                     case "D3":
-                        //;
+                        RunChangePage();
                         break;
                     case "D4":
-                        //;
+                        RunRemovePage();
                         break;
                 }
                 Console.Clear();
@@ -44,7 +44,7 @@ namespace TravelSimulator.View
             Console.Clear();
         }
 
-        //in progress 3/5
+        //finished
         private void RunAddPage()
         {
             ConsoleKeyInfo key;
@@ -68,10 +68,10 @@ namespace TravelSimulator.View
                         RunAddHotelPage();
                         break;
                     case "D4":
-                        //View.Display.PrintAddPage();
+                        RunAddTourist();
                         break;
                     case "D5":
-                        //View.Display.PrintAddPage();
+                        RunAddVoucher();
                         break;
                 }
             } while (keyValue != "D0");
@@ -154,7 +154,27 @@ namespace TravelSimulator.View
             }
             Console.ReadKey(true);
         }
+
+
+
+
+
+        //in progress
+        private void RunAddTourist()
+        {
+
+        }
         
+
+        //in progress
+        private void RunAddVoucher()
+        {
+
+        }
+
+
+
+
         //finished
         private void RunListPage()
         {
@@ -309,6 +329,83 @@ namespace TravelSimulator.View
                 Console.WriteLine(Display.GoBackMessage());
             }
             Console.ReadKey(true);
+        }
+
+        //finished
+        private void RunRemovePage()
+        {
+            ConsoleKeyInfo key;
+            string keyValue;
+            do
+            {
+                Display.PrintRemovePage();
+                key = Console.ReadKey(true);
+                keyValue = key.Key.ToString();
+
+                switch (keyValue)
+                {
+                    case "D1":
+                        RunRemoveCountryPage();
+                        break;
+                    case "D2":
+                        RunRemoveTownPage();
+                        break;
+                    case "D3":
+                        RunRemoveHotelPage();
+                        break;
+                    case "D4":
+                        RunRemoveTourist();
+                        break;
+                    case "D5":
+                        RunRemoveVoucher();
+                        break;
+                }
+            } while (keyValue != "D0");
+        }
+
+
+
+
+
+
+        //in progress
+        private void RunChangePage()
+        {
+
+        }
+
+
+
+
+
+        //in progress
+        private void RunRemoveCountryPage()
+        {
+
+        }
+
+        //in progress
+        private void RunRemoveTownPage()
+        {
+
+        }
+
+        //in progress
+        private void RunRemoveHotelPage()
+        {
+
+        }
+
+        //in progress
+        private void RunRemoveTourist()
+        {
+
+        }
+
+        //in progress
+        private void RunRemoveVoucher()
+        {
+
         }
     }
 }

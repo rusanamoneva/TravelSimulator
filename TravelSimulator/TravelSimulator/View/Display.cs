@@ -22,7 +22,7 @@ namespace TravelSimulator.View
             header.AppendLine();
             return header.ToString();
         }
-        
+
         private static string Footer()
         {
             StringBuilder footer = new StringBuilder();
@@ -33,7 +33,7 @@ namespace TravelSimulator.View
         {
             return Environment.NewLine + "Press any key to go back.";
         }
-        
+
         //--------------------------//
 
         //Home page elements:
@@ -43,7 +43,7 @@ namespace TravelSimulator.View
             StringBuilder home = new StringBuilder();
             return home.Append('-', 19).Append("HOME").Append('-', 19).AppendLine().ToString();
         }
-        
+
         //Buttons
         private static string HomePageOptions()
         {
@@ -144,7 +144,7 @@ namespace TravelSimulator.View
             Console.WriteLine($"Successfully added {countryName}.");
             Console.WriteLine(GoBackMessage());
         }
-        
+
         //Add town elements:
         //----Add a new town----
         private static string AddTownPageMenu()
@@ -209,7 +209,7 @@ namespace TravelSimulator.View
             Console.WriteLine($"Successfully added {hotelName} in {townName}.");
             Console.WriteLine(GoBackMessage());
         }
-        
+
         //--------------------------//
 
         //List page elements:
@@ -255,7 +255,7 @@ namespace TravelSimulator.View
             StringBuilder home = new StringBuilder();
             return home.Append('-', 16).Append("COUNTRIES:").Append('-', 16).AppendLine().ToString();
         }
-        
+
         public static void PrintListCountries()
         {
             Console.Clear();
@@ -416,6 +416,46 @@ namespace TravelSimulator.View
 
         //--------------------------//
 
+        //Remove page elements:
+        //----Remove----
+        private static string RemovePageMenu()
+        {
+            StringBuilder home = new StringBuilder();
+            return home.Append('-', 18).Append("REMOVE").Append('-', 18).AppendLine().ToString();
+        }
+
+        //Buttons
+        private static string RemovePageOptions()
+        {
+            StringBuilder options = new StringBuilder();
+            options.AppendLine()
+                    .AppendLine()
+                    .Append("[1] - Country")
+                    .AppendLine()
+                    .Append("[2] - Town")
+                    .AppendLine()
+                    .Append("[3] - Hotel")
+                    .AppendLine()
+                    .Append("[4] - Tourist")
+                    .AppendLine()
+                    .Append("[5] - Voucher")
+                    .AppendLine()
+                    .AppendLine();
+
+            return options.ToString();
+        }
+
+        public static void PrintRemovePage()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(RemovePageMenu());
+            Console.WriteLine(RemovePageOptions());
+            Console.WriteLine(Footer());
+        }
+
+        //--------------------------//
+        
         //Error screen elements:
         //----Error!----
         private static string ErrorMenu()
@@ -430,6 +470,5 @@ namespace TravelSimulator.View
             Console.WriteLine(Header());
             Console.WriteLine(ErrorMenu());
         }
-        
     }
 }
