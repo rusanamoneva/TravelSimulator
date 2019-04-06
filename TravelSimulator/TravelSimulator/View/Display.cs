@@ -176,6 +176,14 @@ namespace TravelSimulator.View
             Console.WriteLine(GoBackMessage());
         }
 
+        //Add hotel elements:
+        //----Add a new hotel----
+        private static string AddHotelPageMenu()
+        {
+            StringBuilder home = new StringBuilder();
+            return home.Append('-', 13).Append("ADD A NEW HOTEL:").Append('-', 13).AppendLine().ToString();
+        }
+
         //--------------------------//
 
         //Find page elements:
