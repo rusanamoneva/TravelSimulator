@@ -52,19 +52,20 @@ namespace TravelSimulator.View
         {
             ConsoleKeyInfo key;
             string keyValue;
-            Display.PrintAddPage();
             do
             {
+                Console.Clear();
+                Display.PrintAddPage();
                 key = Console.ReadKey(true);
                 keyValue = key.Key.ToString();
 
                 switch (keyValue)
                 {
                     case "D1":
-                        //;
+                        RunAddCountryPage();
                         break;
                     case "D2":
-                        //View.Display.PrintAddPage();
+                        RunAddTownPage();
                         break;
                     case "D3":
                         //View.Display.PrintAddPage();
@@ -79,20 +80,60 @@ namespace TravelSimulator.View
             } while (keyValue != "D0");
         }
 
-        //in progress
+        //finished
         private void RunAddCountryPage()
         {
-
+            Display.PrintAddCountryPage();
+            Services.CountryService countryService = new Services.CountryService();
+            try
+            {
+                string countryName = Console.ReadLine();
+                countryService.AddCountry(countryName);
+                Display.AddedCountryMessage(countryName);
+            }
+            catch (Exception ex)
+            {
+                Display.PrintErrorScreen();
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(Display.GoBackMessage());
+            }
+            Console.ReadKey(true);
         }
         
+        //finished
+        private void RunAddTownPage()
+        {
+            Display.PrintAddTownPage();
+            Services.CountryService countryService = new Services.CountryService();
+            Services.TownService townService = new Services.TownService();
+
+            try
+            {
+                string countryName = Console.ReadLine();
+                countryService.GetCountryByName(countryName);
+                Display.PrintAddTownBottom();
+                string townName = Console.ReadLine();
+                townService.AddTown(countryName, townName);
+                Display.AddedTownMessage(countryName, townName);
+            }
+            catch (Exception ex)
+            {
+                Display.PrintErrorScreen();
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(Display.GoBackMessage());
+            }
+            Console.ReadKey(true);
+        }
+
         //in progress
         private void RunFindPage()
         {
             ConsoleKeyInfo key;
             string keyValue;
-            Display.PrintFindPage();
             do
             {
+                Console.Clear();
+                Display.PrintFindPage();
                 key = Console.ReadKey(true);
                 keyValue = key.Key.ToString();
 
@@ -122,16 +163,17 @@ namespace TravelSimulator.View
         {
             ConsoleKeyInfo key;
             string keyValue;
-            Display.PrintListPage();
             do
             {
+                Console.Clear();
+                Display.PrintListPage();
                 key = Console.ReadKey(true);
                 keyValue = key.Key.ToString();
 
                 switch (keyValue)
                 {
                     case "D1":
-                        //;
+                        RunListCountries();
                         break;
                     case "D2":
                         //View.Display.PrintAddPage();
@@ -147,6 +189,13 @@ namespace TravelSimulator.View
                         break;
                 }
             } while (keyValue != "D0");
+        }
+
+        //finished
+        private void RunListCountries()
+        {
+            Display.PrintListCountries();
+            Console.ReadKey(true);
         }
     }
 }

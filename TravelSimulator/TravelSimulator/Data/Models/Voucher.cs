@@ -71,13 +71,13 @@ namespace TravelSimulator.Data.Models
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append($"Tourist first name: {this.Tourist.TouristFirstName}")
-                .Append($"Tourist last name: {this.Tourist.TouristLastName}")
-                .Append($"Country name: {this.Hotel.Town.Country.CountryName}")
-                .Append($"Town name: {this.Hotel.Town.TownName}")
-                .Append($"Hotel name: {this.Hotel.HotelName}")
-                .Append($"Days of trip: {this.DaysOfTrip}")
-                .Append($"Trip price: {this.TripPrice}lv")
+            sb.Append($"Tourist first name: {this.Tourist.TouristFirstName} ")
+                .Append($"Tourist last name: {this.Tourist.TouristLastName} ")
+                .Append($"Country name: {this.Hotel.Town.Country.CountryName} ")
+                .Append($"Town name: {this.Hotel.Town.TownName} ")
+                .Append($"Hotel name: {this.Hotel.HotelName} ")
+                .Append($"Days of trip: {this.DaysOfTrip} ")
+                .Append($"Trip price: {this.TripPrice}lv ")
                 .Append($"Cancellation period: {this.CancellationPeriod}");
 
             return sb.ToString();

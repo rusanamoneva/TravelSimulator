@@ -21,7 +21,6 @@ namespace TravelSimulator.Data
         public virtual DbSet<Tourist> Tourists { get; set; }
         public virtual DbSet<Hotel> Hotels { get; set; }
         public virtual DbSet<Voucher> Vouchers { get; set; }
-        public virtual DbSet<Room> Rooms { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

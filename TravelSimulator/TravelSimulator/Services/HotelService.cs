@@ -48,20 +48,6 @@ namespace TravelSimulator.Services
             return result;
         }
 
-        public string AddRoomInHotel(string countryName, string townName, string hotelName, Room room)
-        {
-            Country country = FindCountryByName(countryName);
-            Town town = FindTownByName(countryName, townName);
-            Hotel hotel = FindHotelByName(hotelName, town);
-
-            hotel.Rooms.Add(room);
-            context.SaveChanges();
-
-            string result = $"Room {room.RoomType} successfully added.";
-
-            return result;
-        }
-
         public string RemoveHotel(string countryName, string townName, string hotelName)
         {
             Country country = FindCountryByName(countryName);

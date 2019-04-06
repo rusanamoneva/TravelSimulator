@@ -12,8 +12,6 @@ namespace TravelSimulator.Services
 
         string RemoveHotel(string countryName, string townName, string hotelName);
 
-        string AddRoomInHotel(string countryName, string townName, string hotelName, Room room);
-
         List<Hotel> ShowAllHotelsInTown(string countryName, string townName);
 
         decimal ChangeHotelPrice(string countryName, string townName, string hotelName, decimal newPrice);
@@ -23,5 +21,6 @@ namespace TravelSimulator.Services
         int AddStarToHotel(string countryName, string townName, string hotelName);
 
         int RemoveStarFromHotel(string countryName, string townName, string hotelName);
+
     }
 }

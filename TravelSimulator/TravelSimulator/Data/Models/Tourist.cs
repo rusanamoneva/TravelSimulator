@@ -84,8 +84,8 @@ namespace TravelSimulator.Models
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append($"First name: {this.TouristFirstName}")
-                .Append($"Last name: {this.TouristLastName}")
+            sb.Append($"First name: {this.TouristFirstName} ")
+                .Append($"Last name: {this.TouristLastName} ")
                 .Append($"Age: {this.Age}");
 
             return sb.ToString();

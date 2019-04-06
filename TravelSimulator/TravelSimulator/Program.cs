@@ -11,13 +11,8 @@ namespace TravelSimulator
     {
         public static void Main(string[] args)
         {
-            //dataBaseSeeder.SeedTableTowns();
-            //dataBaseSeeder.SeedTableHotelsInBulgaria();
-            //DataBaseSeeder dataBaseSeeder = new DataBaseSeeder();
-
             View.Engine engine = new View.Engine();
             engine.Run();
-            //View.Display.PrintListPage();
         }
     }
 }

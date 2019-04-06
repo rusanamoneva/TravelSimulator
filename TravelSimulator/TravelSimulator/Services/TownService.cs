@@ -22,16 +22,16 @@ namespace TravelSimulator.Services
             this.context = cont;
         }
 
+        //working
         public int AddTown(string countryName, string townName)
         {
             Country country = FindCountryByName(countryName);
 
             if (FindCountryByName(countryName).Towns.FirstOrDefault(x => x.TownName == townName) != null)
             {
-                throw new ArgumentException("Town already exists!");
+                throw new ArgumentException("Town already exists.");
             }
-
-
+            
             Town town = new Town()
             {
                 TownName = townName,
@@ -110,7 +110,7 @@ namespace TravelSimulator.Services
 
             if (town.TownName == null)
             {
-                throw new ArgumentException($"No town with name {townName}");
+                throw new ArgumentException($"No town with name {townName}.");
             }
 
             return town;
@@ -131,7 +131,7 @@ namespace TravelSimulator.Services
 
             if (country.CountryName == null)
             {
-                throw new InvalidOperationException("Town should be in a valid country! This country does not exist!");
+                throw new InvalidOperationException("Country not found.");
             }
 
             return country;

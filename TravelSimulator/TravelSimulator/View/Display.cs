@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TravelSimulator.Data;
+using TravelSimulator.Models;
 
 namespace TravelSimulator.View
 {
@@ -27,6 +29,11 @@ namespace TravelSimulator.View
             return footer.AppendLine().Append('=', 42).AppendLine().Append("[0] - Back").ToString();
         }
 
+        public static string GoBackMessage()
+        {
+            return Environment.NewLine + "Press any key to go back.";
+        }
+        
         //--------------------------//
 
         //Home page elements:
@@ -114,13 +121,59 @@ namespace TravelSimulator.View
             Console.WriteLine(Footer());
         }
 
-        //Add country page
+        //Add country page elements:
+        //----Add a new country----
+        private static string AddCountryPageMenu()
+        {
+            StringBuilder home = new StringBuilder();
+            return home.Append('-', 12).Append("ADD A NEW COUNTRY:").Append('-', 12).AppendLine().ToString();
+        }
+
         public static void PrintAddCountryPage()
         {
             Console.Clear();
             Console.WriteLine(Header());
-            Console.WriteLine(AddPageMenu());
+            Console.WriteLine(AddCountryPageMenu());
+            Console.WriteLine("Enter name of country:");
+        }
 
+        public static void AddedCountryMessage(string countryName)
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(AddCountryPageMenu());
+            Console.WriteLine($"Successfully added {countryName}.");
+            Console.WriteLine(GoBackMessage());
+        }
+        
+        //Add town elements:
+        //----Add a new town----
+        private static string AddTownPageMenu()
+        {
+            StringBuilder home = new StringBuilder();
+            return home.Append('-', 14).Append("ADD A NEW TOWN").Append('-', 14).AppendLine().ToString();
+        }
+
+        public static void PrintAddTownPage()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(AddTownPageMenu());
+            Console.WriteLine("First, enter name of country:");
+        }
+
+        public static void PrintAddTownBottom()
+        {
+            Console.WriteLine("Now enter name of town:");
+        }
+
+        public static void AddedTownMessage(string countryName, string townName)
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(AddTownPageMenu());
+            Console.WriteLine($"Successfully added {townName} in {countryName}.");
+            Console.WriteLine(GoBackMessage());
         }
 
         //--------------------------//
@@ -158,9 +211,9 @@ namespace TravelSimulator.View
                     .AppendLine()
                     .Append("[1] - Countries")
                     .AppendLine()
-                    .Append("[2] - Towns")
+                    .Append("[2] - Towns in...")
                     .AppendLine()
-                    .Append("[3] - Hotels")
+                    .Append("[3] - Hotels in...")
                     .AppendLine()
                     .Append("[4] - Leaving on...")
                     .AppendLine()
@@ -181,15 +234,42 @@ namespace TravelSimulator.View
             Console.WriteLine(Footer());
         }
 
+        //----Countries:----
+        private static string ListCountriesMenu()
+        {
+            StringBuilder home = new StringBuilder();
+            return home.Append('-', 16).Append("COUNTRIES:").Append('-', 16).AppendLine().ToString();
+        }
+        
+        public static void PrintListCountries()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(ListCountriesMenu(), Environment.NewLine);
+            TravelSimulatorContext context = new TravelSimulatorContext();
+            foreach (Country country in context.Countries)
+            {
+                Console.WriteLine(country.CountryName);
+            }
+            Console.WriteLine(GoBackMessage());
+        }
+
         //--------------------------//
 
         //Error screen elements:
         //----Error!----
-
         private static string ErrorMenu()
         {
             StringBuilder home = new StringBuilder();
             return home.Append('-', 18).Append("ERROR!").Append('-', 18).AppendLine().ToString();
         }
+
+        public static void PrintErrorScreen()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(ErrorMenu());
+        }
+        
     }
 }

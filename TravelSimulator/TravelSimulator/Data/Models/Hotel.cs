@@ -17,15 +17,12 @@ namespace TravelSimulator.Data.Models
 
         public virtual ICollection<Voucher> Vouchers { get; set; }
 
-        public virtual ICollection<Room> Rooms { get; set; }
-
         public int TownId { get; set; }
         public virtual Town Town { get; set; }
 
         public Hotel()
         {
             this.Vouchers = new List<Voucher>();
-            this.Rooms = new List<Room>();
         }
 
         public string HotelName
@@ -74,9 +71,9 @@ namespace TravelSimulator.Data.Models
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append($"Hotel name: {this.HotelName}")
-                .Append($"Town: {this.Town.TownName}")
-                .Append($"Stars: {this.Stars}")
+            sb.Append($"Hotel name: {this.HotelName} ")
+                .Append($"Town: {this.Town.TownName} ")
+                .Append($"Stars: {this.Stars} ")
                 .Append($"Price per night: {this.PricePerNight}lv");
 
             return sb.ToString();
