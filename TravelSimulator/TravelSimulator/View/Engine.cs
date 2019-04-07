@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace TravelSimulator.View
@@ -154,27 +155,77 @@ namespace TravelSimulator.View
             }
             Console.ReadKey(true);
         }
-
-
-
-
-
-        //in progress
+        
+        //finished
         private void RunAddTourist()
         {
-
+            Display.PrintAddTouristPage();
+            Services.TouristService touristService = new Services.TouristService();
+            try
+            {
+                string firstName = Console.ReadLine();
+                Console.WriteLine("Enter last name:");
+                string lastName = Console.ReadLine();
+                Console.WriteLine("Enter age:");
+                int age = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter home country:");
+                string homeCountry = Console.ReadLine();
+                touristService.RegisterTourist(firstName, lastName, age, homeCountry);
+                Display.AddedTouristMessage(firstName, lastName);
+            }
+            catch (Exception ex)
+            {
+                Display.PrintErrorScreen();
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(Display.GoBackMessage());
+            }
+            Console.ReadKey(true);
         }
         
-
-        //in progress
+        //cursed - do not touch
         private void RunAddVoucher()
         {
+            Display.PrintAddVoucherPage();
+            Services.TouristService touristService = new Services.TouristService();
+            Services.HotelService hotelService = new Services.HotelService();
+            Services.VoucherService voucherService = new Services.VoucherService();
+            try
+            {
+                Console.WriteLine("Enter tourist's ID:");
+                int touristID = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter name of country for hotel:");
+                string countryName = Console.ReadLine();
+                Console.WriteLine("Enter name of town for hotel:");
+                string townName = Console.ReadLine();
+                Console.WriteLine("Enter name of hotel:");
+                string hotelName = Console.ReadLine();
+                Console.WriteLine("Enter days of trip:");
+                int daysOfTrip = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter cancellation period (in days):");
+                int cancellationPeriod = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter start date (yyyy mm dd):");
+                string[] date1 = Console.ReadLine().Split().ToArray();
+                DateTime startDate = new DateTime(int.Parse(date1[0]), int.Parse(date1[1]), int.Parse(date1[2]));
+                Console.WriteLine("Enter end date (yyyy mm dd):");
+                string[] date2 = Console.ReadLine().Split().ToArray();
+                DateTime endDate = new DateTime(int.Parse(date2[0]), int.Parse(date2[1]), int.Parse(date2[2]));
 
+                voucherService.CreateVoucher(touristService.GetTouristById(touristID),
+                    voucherService.FindHotelByName(townName, hotelName, voucherService.FindTownByName(countryName, townName)),
+                    daysOfTrip,
+                    voucherService.CalculateTripPriceForVoucher(daysOfTrip, voucherService.FindHotelByName(townName, hotelName, voucherService.FindTownByName(countryName, townName)).PricePerNight),
+                    cancellationPeriod, startDate, endDate);
+                Display.AddedVoucherMessage();
+            }
+            catch (Exception ex)
+            {
+                Display.PrintErrorScreen();
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(Display.GoBackMessage());
+            }
+            Console.ReadKey(true);
         }
-
-
-
-
+        
         //finished
         private void RunListPage()
         {
@@ -364,37 +415,126 @@ namespace TravelSimulator.View
             } while (keyValue != "D0");
         }
 
-
-
-
+        
 
 
         //in progress
         private void RunChangePage()
         {
-
+            //ConsoleKeyInfo key;
+            //string keyValue;
+            //do
+            //{
+            //    Display.PrintRemovePage();
+            //    key = Console.ReadKey(true);
+            //    keyValue = key.Key.ToString();
+            //
+            //    switch (keyValue)
+            //    {
+            //        case "D1":
+            //            RunRemoveCountryPage();
+            //            break;
+            //        case "D2":
+            //            RunRemoveTownPage();
+            //            break;
+            //        case "D3":
+            //            RunRemoveHotelPage();
+            //            break;
+            //        case "D4":
+            //            RunRemoveTourist();
+            //            break;
+            //        case "D5":
+            //            RunRemoveVoucher();
+            //            break;
+            //    }
+            //} while (keyValue != "D0");
         }
+        
 
 
 
-
-
-        //in progress
+        //finished
         private void RunRemoveCountryPage()
         {
-
+            Display.PrintRemoveCountryPage();
+            Services.CountryService countryService = new Services.CountryService();
+            try
+            {
+                string countryName = Console.ReadLine();
+                countryService.GetCountryByName(countryName);
+                Services.VoucherService voucherService = new Services.VoucherService();
+                voucherService.DeleteVoucherByCountry(countryName);
+                Services.HotelService hotelService = new Services.HotelService();
+                hotelService.DeleteHotelByCountry(countryName);
+                Services.TownService townService = new Services.TownService();
+                countryService.DeleteCountry(countryName);
+                Display.RemovedCountryMessage(countryName);
+            }
+            catch (Exception ex)
+            {
+                Display.PrintErrorScreen();
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(Display.GoBackMessage());
+            }
+            Console.ReadKey(true);
         }
 
-        //in progress
+        //finished
         private void RunRemoveTownPage()
         {
-
+            Display.PrintRemoveTownPage();
+            Services.CountryService countryService = new Services.CountryService();
+            try
+            {
+                string countryName = Console.ReadLine();
+                countryService.GetCountryByName(countryName);
+                Console.WriteLine("Now enter name of town:");
+                string townName = Console.ReadLine();
+                Services.VoucherService voucherService = new Services.VoucherService();
+                Services.HotelService hotelService = new Services.HotelService();
+                Services.TownService townService = new Services.TownService();
+                townService.GetTownByName(countryName, townName);
+                voucherService.DeleteVoucherByTown(townName);
+                hotelService.DeleteHotelByTown(townName);
+                townService.DeleteTown(countryName, townName);
+                Display.RemovedTownMessage(countryName, townName);
+            }
+            catch (Exception ex)
+            {
+                Display.PrintErrorScreen();
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(Display.GoBackMessage());
+            }
+            Console.ReadKey(true);
         }
 
         //in progress
         private void RunRemoveHotelPage()
         {
-
+            //Display.PrintRemoveHotelPage();
+            //Services.CountryService countryService = new Services.CountryService();
+            //try
+            //{
+            //    string countryName = Console.ReadLine();
+            //    countryService.GetCountryByName(countryName);
+            //    Console.WriteLine("Now enter name of town:");
+            //    string townName = Console.ReadLine();
+            //    Services.VoucherService voucherService = new Services.VoucherService();
+            //    Services.HotelService hotelService = new Services.HotelService();
+            //    Services.TownService townService = new Services.TownService();
+            //    townService.GetTownByName(countryName, townName);
+            //    voucherService.DeleteVoucherByTown(townName);
+            //    hotelService.DeleteHotelByTown(townName);
+            //    townService.DeleteTown(countryName, townName);
+            //    Display.RemovedTownMessage(countryName, townName);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Display.PrintErrorScreen();
+            //    Console.WriteLine(ex.Message);
+            //    Console.WriteLine(Display.GoBackMessage());
+            //}
+            //Console.ReadKey(true);
         }
 
         //in progress

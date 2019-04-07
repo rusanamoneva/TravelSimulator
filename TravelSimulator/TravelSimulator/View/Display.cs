@@ -210,6 +210,55 @@ namespace TravelSimulator.View
             Console.WriteLine(GoBackMessage());
         }
 
+        //Add tourist elements:
+        //----Add a new tourist:----
+        private static string AddTouristPageMenu()
+        {
+            StringBuilder home = new StringBuilder();
+            return home.Append('-', 12).Append("ADD A NEW TOURIST:").Append('-', 12).AppendLine().ToString();
+        }
+
+        public static void PrintAddTouristPage()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(AddTouristPageMenu());
+            Console.WriteLine("Enter first name:");
+        }
+
+        public static void AddedTouristMessage(string firstName, string lastName)
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(AddTouristPageMenu());
+            Console.WriteLine($"Successfully registered {firstName} {lastName}.");
+            Console.WriteLine(GoBackMessage());
+        }
+        
+        //Add voucher elements
+        //----Add a new voucher----
+        private static string AddVoucherPageMenu()
+        {
+            StringBuilder home = new StringBuilder();
+            return home.Append('-', 12).Append("ADD A NEW VOUCHER:").Append('-', 12).AppendLine().ToString();
+        }
+
+        public static void PrintAddVoucherPage()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(AddVoucherPageMenu());
+        }
+
+        public static void AddedVoucherMessage()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(AddVoucherPageMenu());
+            Console.WriteLine("Successfully added voucher.");
+            Console.WriteLine(GoBackMessage());
+        }
+        
         //--------------------------//
 
         //List page elements:
@@ -454,8 +503,58 @@ namespace TravelSimulator.View
             Console.WriteLine(Footer());
         }
 
+        //Remove country page elements:
+        //----Remove country----
+        private static string RemoveCountryPageMenu()
+        {
+            StringBuilder home = new StringBuilder();
+            return home.Append('-', 14).Append("REMOVE COUNTRY").Append('-', 14).AppendLine().ToString();
+        }
+
+        public static void PrintRemoveCountryPage()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(RemoveCountryPageMenu());
+            Console.WriteLine("Enter name of country:");
+        }
+
+        public static void RemovedCountryMessage(string countryName)
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(RemoveCountryPageMenu());
+            Console.WriteLine($"Successfully removed {countryName}.");
+            Console.WriteLine(GoBackMessage());
+        }
+
+        //Remove town page elements:
+        //----Remove town----
+        private static string RemoveTownPageMenu()
+        {
+            StringBuilder home = new StringBuilder();
+            return home.Append('-', 15).Append("REMOVE TOWN:").Append('-', 15).AppendLine().ToString();
+        }
+
+        public static void PrintRemoveTownPage()
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(RemoveTownPageMenu());
+            Console.WriteLine("Enter name of country:");
+        }
+
+        public static void RemovedTownMessage(string countryName, string townName)
+        {
+            Console.Clear();
+            Console.WriteLine(Header());
+            Console.WriteLine(RemoveTownPageMenu());
+            Console.WriteLine($"Successfully removed {townName} from {countryName}.");
+            Console.WriteLine(GoBackMessage());
+        }
+
         //--------------------------//
-        
+
         //Error screen elements:
         //----Error!----
         private static string ErrorMenu()

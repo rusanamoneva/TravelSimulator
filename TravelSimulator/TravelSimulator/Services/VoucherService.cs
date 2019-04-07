@@ -244,7 +244,7 @@ namespace TravelSimulator.Services
             return result;
         }
 
-        private decimal CalculateTripPriceForVoucher(int daysOfTrip, decimal hotelPricePerNight)
+        public decimal CalculateTripPriceForVoucher(int daysOfTrip, decimal hotelPricePerNight)
         {
             decimal tripPrice = 0M;
 
@@ -267,7 +267,7 @@ namespace TravelSimulator.Services
         }
 
         //Returns a valid town used in methods
-        private Town FindTownByName(string countryName, string townName)
+        public Town FindTownByName(string countryName, string townName)
         {
             Town town = new Town();
 
@@ -288,7 +288,7 @@ namespace TravelSimulator.Services
         }
 
         //Returns a valid country used in methods
-        private Country FindCountryByName(string countryName)
+        public Country FindCountryByName(string countryName)
         {
             Country country = new Country();
 
@@ -309,7 +309,7 @@ namespace TravelSimulator.Services
         }
 
         //Returns a valid hotel used in methods
-        private Hotel FindHotelByName(string townName, string hotelName, Town town)
+        public Hotel FindHotelByName(string townName, string hotelName, Town town)
         {
             Hotel hotel = new Hotel();
 
