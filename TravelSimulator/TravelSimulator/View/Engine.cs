@@ -32,11 +32,11 @@ namespace TravelSimulator.View
                         RunListPage();
                         break;
                     case "D3":
-                        RunChangePage();
-                        break;
-                    case "D4":
                         RunRemovePage();
                         break;
+                    //case "D4":
+                    //    RunRemovePage();
+                    //    break;
                 }
                 Console.Clear();
                 View.Display.PrintHomePage();

@@ -54,9 +54,8 @@ namespace TravelSimulator.View
                     .AppendLine()
                     .Append("[2] - List...")
                     .AppendLine()
-                    .Append("[3] - Change...")
+                    .Append("[3] - Remove...")
                     .AppendLine()
-                    .Append("[4] - Remove...")
                     .AppendLine()
                     .AppendLine()
                     .AppendLine();
